@@ -1,0 +1,105 @@
+/* 
+-------------------
+	General
+-------------------
+*/
+
+:root {
+	--main-fg: #fff;
+	--high-fg: #f33;
+	--sec-high-fg: #ff0;
+	--main-bg: #202020;
+	--seco-bg: #303030;
+	--main-ft: "Segoe UI"
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	margin: 0;
+}
+
+/* * { border: 1px solid red } */
+
+html {
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 800px;
+}
+
+html,
+body {
+	color: var(--main-fg);
+	background-color: var(--main-bg);
+	font-family: var(--main-ft);
+}
+
+a,
+a:hover,
+a:visited {
+	text-decoration: none;
+	color: inherit;
+}
+
+code,
+pre,
+.mono {
+	font-family: "Consolas", monospace
+}
+
+/* 
+-------------------
+	Classes
+-------------------
+*/
+
+.heading {
+	display: flex;
+	gap: 1em;
+	padding-bottom: 1em;
+	border-bottom: 1px solid #fff;
+}
+
+.heading__img {
+	border-radius: 1em;
+	margin: 1em;
+	border: 3px solid var(--high-fg)
+}
+
+.heading__text {
+	align-self: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.highlight {
+	font-weight: bold;
+	color: var(--high-fg)
+}
+
+.highlight-bigger {
+	font-weight: bold;
+	font-size: 1.125em;
+	color: var(--high-fg)
+}
+
+.content-section {
+	margin-top: 2em;
+	padding-left: 1em;
+	padding-right: 1em;
+}
+
+.highlight-li {
+	color: var(--sec-high-fg);
+}
+
+.circ-boxed {
+	border-radius: 0.6em;
+	background-color: var(--seco-bg);
+	padding: 0.25em;
+}
+
+.spaced-lis>li {
+	margin-top: .5em;
+}
