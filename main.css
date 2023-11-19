@@ -20,11 +20,14 @@
 	margin: 0;
 }
 
-/* * { border: 1px solid red } */
+/* * {
+	border: 1px solid red
+} */
 
 html {
 	margin-left: auto;
 	margin-right: auto;
+	margin-top: 1em;
 	max-width: 800px;
 }
 
@@ -67,6 +70,12 @@ pre,
 	border: 3px solid var(--high-fg)
 }
 
+.heading__content {
+	display: flex;
+	justify-content: space-around;
+	flex-direction: column;
+}
+
 .heading__text {
 	align-self: center;
 	margin-left: auto;
@@ -102,4 +111,12 @@ pre,
 
 .spaced-lis>li {
 	margin-top: .5em;
+}
+
+.quote {
+	display: block;
+	margin-left: auto;
+	width: 80%;
+	min-width: 100px;
+	font-style: italic;
 }
