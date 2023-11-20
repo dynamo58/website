@@ -10,6 +10,7 @@
 	--sec-high-fg: #ff0;
 	--main-bg: #202020;
 	--seco-bg: #303030;
+	--tern-bg: #404040;
 	--main-ft: "Segoe UI"
 }
 
@@ -119,4 +120,25 @@ pre,
 	width: 80%;
 	min-width: 100px;
 	font-style: italic;
+}
+
+
+.code-block-wrapper {
+	border-radius: .75em;
+	cursor: pointer;
+	background-color: var(--seco-bg);
+}
+
+.code-block-wrapper>pre {
+	padding: .5em;
+}
+
+.code-block-wrapper__label {
+	padding-left: 1em;
+	border-top-right-radius: .75em;
+	border-top-left-radius: .75em;
+	background-color: var(--tern-bg);
+	width: calc(100%);
+	display: block;
+	overflow: hidden;
 }
