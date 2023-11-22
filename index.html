@@ -5,14 +5,21 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+	<link rel="icon" href="favicon.ico" type="image/x-icon">
 	<link rel="stylesheet" href="main.css">
 
-	<title>~ // smolik.xyz</title>
+	<title>smolik.xyz</title>
 </head>
 
 <body>
 	<div class="heading">
-		<img class="heading__img" src="/guh.webp" alt="cute cat" />
+		<script>
+			const IMGS = ["guh.webp", "melon.webp"];
+			const rand_idx = Math.floor(Math.random() * (IMGS.length));
+
+			document.write(`<img style="width:128px; height: 128px" class="heading__img" src="/${IMGS[rand_idx]}" alt="cute cat" />`)
+		</script>
+
 		<div class="heading__content">
 			<p class="heading__text" style="display: block">
 				<s></s><span class="highlight-bigger">Ahoj!</span> Narazil/a jsi na

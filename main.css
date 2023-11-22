@@ -138,7 +138,9 @@ pre,
 	border-top-right-radius: .75em;
 	border-top-left-radius: .75em;
 	background-color: var(--tern-bg);
-	width: calc(100%);
+	width: 100%;
 	display: block;
 	overflow: hidden;
+	position: relative;
+	right: 0;
 }
