@@ -5,7 +5,14 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="/main.css">
-	<title>AaAK // smolik.xyz</title>
+
+	<script>
+		async function copyToClipboard(el) {
+			await navigator.clipboard.writeText(el.textContent);
+		}
+	</script>
+
+	<title>AaAK | smolik.xyz</title>
 </head>
 
 <body>
@@ -22,7 +29,10 @@
 	<div class="content-section">
 		<h2 class="highlight">Úkol 0 (prerekvizity)</h2>
 
-		Stáhněte si
+		Stáhněte si:
+		<ul>
+			<li> Následující startovní projekt – zde</li>
+		</ul>
 	</div>
 
 
@@ -43,14 +53,6 @@
 }</pre>
 		</div>
 	</div>
-
-
-	<script>
-		async function copyToClipboard(el) {
-			console.log(el.textContent);
-			await navigator.clipboard.writeText(el.textContent);
-		}
-	</script>
 </body>
 
 </html>
