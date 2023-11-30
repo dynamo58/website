@@ -9,10 +9,16 @@
 	<script>
 		async function copyToClipboard(el) {
 			await navigator.clipboard.writeText(el.textContent);
+
+			el.classList.toggle("green-tinted");
+
+			setTimeout(() => {
+				el.classList.toggle("green-tinted");
+			}, 1000);
 		}
 	</script>
 
-	<title>AaAK | smolik.xyz</title>
+	<title>Animace a animační křivky | smolik.xyz</title>
 </head>
 
 <body>
@@ -21,38 +27,154 @@
 
 	<div class="content-section">
 		<p>Dnešním ultimátním cílem bude postavit překážkovou dráhou s pohyblivými prvky.</p>
+		<!-- TODO: web{p,m} videa "finálního produktu"  -->
 	</div>
 
-	<!-- TODO: web{p,m} videa "finálního produktu"  -->
-
-
 	<div class="content-section">
-		<h2 class="highlight">Úkol 0 (prerekvizity)</h2>
+		<h2 class="highlight">Fáze 0 – prerekvizity</h2>
 
-		Stáhněte si:
 		<ul>
-			<li> Následující startovní projekt – zde</li>
+			<li>Vytvořte si v Unity Hubu nový 3D projekt – např. se jménem „Animace“</li>
 		</ul>
 	</div>
 
-
 	<div class="content-section">
-		<h2 class="highlight">Úkol 1</h2>
+		<h2 class="highlight">Fáze 1 – základní objekty</h2>
 		<br>
 		<p>
-			Udělejte tohle a tohle
-		</p><br>
+			Vytvořte si klasický scénář – kapsulový hráč s first-person kamerou na ploše. Vaše hierarchie hierarchie
+			nechť vypadá následovně:
+		<ul class="cute-border">
+			<li>(<b>Directional Light</b>) Directional Light</li>
+			<li>(<b>Plane</b>) Plane</li>
+			<li> Player
+				<ul>
+					<li>(<b>Capsule</b>) PlayerBody</li>
+					<li>(<b>Cube</b>) PlayerFace</li>
+					<li>(<b>Camera</b>) Main Camera</li>
+				</ul>
+			</li>
+			<li>(<b>Cube</b>) Dummy</li>
+		</ul>
+		</p>
 
-		<div class="code-block-wrapper">
-			<span class="code-block-wrapper__label">Klikněte do bloku pro jeho zkopírování</span>
-			<pre onclick="copyToClipboard(this)" class="hljs code-block-modif"
-				style="display: block; overflow-x: auto; padding: 0.5em; color: rgb(235, 219, 178);"><span class="hljs-function" style="color: rgb(142, 192, 124);"><span class="hljs-keyword" style="color: rgb(142, 192, 124);">public</span> <span class="hljs-keyword" style="color: rgb(142, 192, 124);">static</span> <span class="hljs-keyword" style="color: rgb(142, 192, 124);">void</span> <span class="hljs-title" style="color: rgb(131, 165, 152);">Main</span>(<span class="hljs-params" style="color: rgb(250, 189, 47);"><span class="hljs-keyword" style="color: rgb(142, 192, 124);">string</span>[] args</span>)
-</span>{
-	System.Console.WriteLine(<span class="hljs-string" style="color: rgb(184, 187, 38);">"test"</span>);
-	<span class="hljs-keyword" style="color: rgb(251, 73, 52);">return</span>;
-}</pre>
-		</div>
+		<p>Podoba by poté měla být příbližně následující:</p>
+		<img src="./media/phase0_1.png" alt="obrázek první podoby">
+
+		<br>
+
+		<p>Hráče potřebujeme nyní rozhýbat – vytvoříme dva skripty:</p>
+		<ul class="cute-border"">
+			<li><code>PlayerMovement.cs</code> – ovládání hráče pomocí šipek nebo WASD</li>
+			<li><code>CameraMovement.cs</code> – hýbání kamery pomocí pohybů myši</li>
+		</ul>
+
+		<br>
+
+		<p>Obsahy těchto souborů nebudou překvapivé – není to nic, co jsme tu dosud neviděli.</p>
+
+		<br>
+
+		<div class=" code-block-wrapper">
+			<span class="code-block-wrapper__label-upper mono">PlayerMovement.cs</span>
+
+
+			<pre onclick="copyToClipboard(this)" class="hljs"
+				style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(40, 40, 40); color: rgb(235, 219, 178);"><span class="hljs-keyword" style="color: rgb(251, 73, 52);">using</span> UnityEngine;
+
+<span class="hljs-keyword" style="color: rgb(251, 73, 52);">public</span> <span class="hljs-keyword" style="color: rgb(251, 73, 52);">class</span> <span class="hljs-title" style="color: rgb(131, 165, 152);">PlayerMovement</span> : <span class="hljs-title" style="color: rgb(131, 165, 152);">MonoBehaviour</span>
+{
+    <span class="hljs-keyword" style="color: rgb(251, 73, 52);">float</span> Speed = <span class="hljs-number" style="color: rgb(211, 134, 155);">5</span>f;
+    <span class="hljs-function" style="color: rgb(142, 192, 124);"><span class="hljs-keyword" style="color: rgb(142, 192, 124);">private</span> <span class="hljs-keyword" style="color: rgb(142, 192, 124);">void</span> <span class="hljs-title" style="color: rgb(131, 165, 152);">Update</span>(<span class="hljs-params" style="color: rgb(250, 189, 47);"></span>)
+    </span>{
+        <span class="hljs-keyword" style="color: rgb(251, 73, 52);">if</span> (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
+        {
+            <span class="hljs-keyword" style="color: rgb(251, 73, 52);">this</span>.transform.position += Speed * Time.deltaTime * <span class="hljs-keyword" style="color: rgb(251, 73, 52);">new</span> Vector3(
+                Camera.main.transform.forward.x,
+                <span class="hljs-number" style="color: rgb(211, 134, 155);">0</span>,
+                Camera.main.transform.forward.z
+            );
+        }
+
+        <span class="hljs-keyword" style="color: rgb(251, 73, 52);">if</span> (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
+        {
+            <span class="hljs-keyword" style="color: rgb(251, 73, 52);">this</span>.transform.position -= Speed * Time.deltaTime * <span class="hljs-keyword" style="color: rgb(251, 73, 52);">new</span> Vector3(
+                Camera.main.transform.forward.x,
+                <span class="hljs-number" style="color: rgb(211, 134, 155);">0</span>,
+                Camera.main.transform.forward.z
+            );
+        }
+
+        <span class="hljs-keyword" style="color: rgb(251, 73, 52);">if</span> (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
+        {
+            
+            <span class="hljs-keyword" style="color: rgb(251, 73, 52);">this</span>.transform.position -= Speed * Time.deltaTime * <span class="hljs-keyword" style="color: rgb(251, 73, 52);">new</span> Vector3(
+                Camera.main.transform.right.x,
+                <span class="hljs-number" style="color: rgb(211, 134, 155);">0</span>,
+                Camera.main.transform.right.z
+            );
+        }
+
+        <span class="hljs-keyword" style="color: rgb(251, 73, 52);">if</span> (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
+        {
+            <span class="hljs-keyword" style="color: rgb(251, 73, 52);">this</span>.transform.position += Speed * Time.deltaTime * <span class="hljs-keyword" style="color: rgb(251, 73, 52);">new</span> Vector3(
+                Camera.main.transform.right.x,
+                <span class="hljs-number" style="color: rgb(211, 134, 155);">0</span>,
+                Camera.main.transform.right.z
+            );
+        }
+    }
+}
+</pre>
+
+			<span class="code-block-wrapper__label-lower">Klikněte do bloku pro jeho zkopírování</span>
 	</div>
+
+	<br>
+
+	<div class=" code-block-wrapper">
+		<span class="code-block-wrapper__label-upper mono">CameraMovement.cs</span>
+
+		<pre onclick="copyToClipboard(this)" class="hljs"
+			style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(40, 40, 40); color: rgb(235, 219, 178);"><span class="hljs-keyword" style="color: rgb(251, 73, 52);">using</span> UnityEngine;
+		
+		<span class="hljs-keyword" style="color: rgb(251, 73, 52);">public</span> <span class="hljs-keyword" style="color: rgb(251, 73, 52);">class</span> <span class="hljs-title" style="color: rgb(131, 165, 152);">CameraMovement</span> : <span class="hljs-title" style="color: rgb(131, 165, 152);">MonoBehaviour</span>
+		{
+		    <span class="hljs-keyword" style="color: rgb(251, 73, 52);">float</span> Sensitivity = <span class="hljs-number" style="color: rgb(211, 134, 155);">10</span>f;
+		    <span class="hljs-function" style="color: rgb(142, 192, 124);"><span class="hljs-keyword" style="color: rgb(142, 192, 124);">void</span> <span class="hljs-title" style="color: rgb(131, 165, 152);">Update</span>(<span class="hljs-params" style="color: rgb(250, 189, 47);"></span>)
+		    </span>{
+		        <span class="hljs-keyword" style="color: rgb(251, 73, 52);">float</span> dx = Input.GetAxis(<span class="hljs-string" style="color: rgb(184, 187, 38);">"Mouse X"</span>);
+		        transform.eulerAngles += Vector3.up * dx * Sensitivity;
+		
+		        <span class="hljs-keyword" style="color: rgb(251, 73, 52);">float</span> dy = Input.GetAxis(<span class="hljs-string" style="color: rgb(184, 187, 38);">"Mouse Y"</span>);
+		        transform.eulerAngles += Vector3.left * dy * Sensitivity;
+		    }
+		}
+		</pre>
+
+		<span class="code-block-wrapper__label-lower">Klikněte do bloku pro jeho zkopírování</span>
+	</div>
+
+	<br>
+
+	<p>Následně tyto dva skripty adekvátně přiřadíme našim objektům:</p>
+	<ul>
+		<li><code>PlayerMovement.cs</code> – objektu <i>Player</i></li>
+		<li><code>CameraMovement.cs</code> – objektu <i>Main Camera</i></li>
+	</ul>
+
+
+
+	</div>
+
+	<div class="content-section">
+		<h2 class="highlight-alt">Checkpoint 1 – funkční ovládání hráče</h2>
+
+		<p>Zkontrolujte si, že vám vše funguje – měli byste se moci pohybovat volně pomocí kláves WASD nebo šipek.
+			Dopomůže vám kostka <i>Dummy</i> jakožto referenční bod.</p>
+	</div>
+
+	<div class="DUMMY" style="height: 10em"></div>
 </body>
 
 </html>

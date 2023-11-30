@@ -11,6 +11,7 @@
 	--main-bg: #202020;
 	--seco-bg: #303030;
 	--tern-bg: #404040;
+	--quar-bg: #505050;
 	--main-ft: "Segoe UI"
 }
 
@@ -85,19 +86,31 @@ pre,
 
 .highlight {
 	font-weight: bold;
-	color: var(--high-fg)
+	color: var(--high-fg);
+}
+
+.highlight-alt {
+	font-weight: bold;
+	color: var(--sec-high-fg);
 }
 
 .highlight-bigger {
 	font-weight: bold;
 	font-size: 1.125em;
-	color: var(--high-fg)
+	color: var(--high-fg);
 }
 
 .content-section {
 	margin-top: 2em;
 	padding-left: 1em;
 	padding-right: 1em;
+}
+
+.content-section>img {
+	max-width: 80%;
+	display: block;
+	margin: 1em auto;
+	border-radius: 1em;
 }
 
 .highlight-li {
@@ -133,14 +146,40 @@ pre,
 	padding: .5em;
 }
 
-.code-block-wrapper__label {
+.code-block-wrapper__label-upper {
 	padding-left: 1em;
 	border-top-right-radius: .75em;
 	border-top-left-radius: .75em;
+	border-bottom: 1px solid #fff;
+	width: 100%;
+	display: block;
+	overflow: hidden;
+	position: relative;
+	right: 0;
+}
+
+.code-block-wrapper__label-lower {
+	padding-left: 1em;
+	border-bottom-right-radius: .75em;
+	border-bottom-left-radius: .75em;
 	background-color: var(--tern-bg);
 	width: 100%;
 	display: block;
 	overflow: hidden;
 	position: relative;
 	right: 0;
+}
+
+.cute-border {
+	padding: 1em 2em 1em 2em;
+	margin: 1em 0;
+	border-radius: 1em;
+	border: 1px solid #fff;
+	display: inline-block;
+	/* max-width: 30em; */
+}
+
+.green-tinted {
+	transition: background-color 0.3s ease;
+	background-color: #00ff0033 !important;
 }
