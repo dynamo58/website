@@ -22,8 +22,7 @@
 </head>
 
 <body>
-	<h1 class="highligh" style="border-bottom: 1px solid #fff">Animace a animační křivky (pá 15. 12. 2023) [<a
-			class="highlight" href="./slides/">prez</a>]</h1>
+	<h1 class="highligh" style="border-bottom: 1px solid #fff">Animace a animační křivky (pá 15. 12. 2023) [<a class="highlight" href="./slides/">prez</a>]</h1>
 
 	<div class="content-section">
 		<p>Dnešním ultimátním cílem bude postavit překážkovou dráhou s pohyblivými prvky.</p>
@@ -40,41 +39,36 @@
 
 	<div class="content-section">
 		<h2 class="highlight">Fáze 1 – základní objekty</h2>
-		<br>
-		<p>
-			Vytvořte si klasický scénář – kapsulový hráč s first-person kamerou na ploše. Vaše hierarchie hierarchie
-			nechť vypadá následovně:
-		<ul class="cute-border">
-			<li>(<b>Directional Light</b>) Directional Light</li>
-			<li>(<b>Plane</b>) Plane</li>
-			<li> Player
-				<ul>
-					<li>(<b>Capsule</b>) PlayerBody</li>
-					<li>(<b>Cube</b>) PlayerFace</li>
-					<li>(<b>Camera</b>) Main Camera</li>
-				</ul>
-			</li>
-			<li>(<b>Cube</b>) Dummy</li>
-		</ul>
-		</p>
+		<div>
+			<p>
+				Vytvořte si klasický scénář – kapsulový hráč s first-person kamerou na ploše. Vaše hierarchie hierarchie nechť vypadá následovně:
+			</p>
+			<ul class="cute-border">
+				<li>(<b>Directional Light</b>) Directional Light</li>
+				<li>(<b>Plane</b>) Plane</li>
+				<li> Player
+					<ul>
+						<li>(<b>Capsule</b>) PlayerBody</li>
+						<li>(<b>Cube</b>) PlayerFace</li>
+						<li>(<b>Camera</b>) Main Camera</li>
+					</ul>
+				</li>
+				<li>(<b>Cube</b>) Target</li>
+			</ul>
+		</div>
 
-		<p>Podoba by poté měla být příbližně následující:</p>
-		<img src="./media/phase0_1.png" alt="obrázek první podoby">
-
-		<br>
-
-		<p>Hráče potřebujeme nyní rozhýbat – vytvoříme dva skripty:</p>
-		<ul class="cute-border"">
-			<li><code>PlayerMovement.cs</code> – ovládání hráče pomocí šipek nebo WASD</li>
-			<li><code>CameraMovement.cs</code> – hýbání kamery pomocí pohybů myši</li>
-		</ul>
-
-		<br>
-
+		<div>
+			<p>Podoba by poté měla být příbližně následující:</p>
+			<img src="./media/phase1_1.png" alt="obrázek první podoby">
+	
+			<p>Hráče potřebujeme nyní rozhýbat – vytvoříme dva skripty:</p>
+			<ul class="cute-border"">
+				<li><code>PlayerMovement.cs</code> – ovládání hráče pomocí šipek nebo WASD</li>
+				<li><code>CameraMovement.cs</code> – hýbání kamery pomocí pohybů myši</li>
+			</ul>
+		</div>
+		
 		<p>Obsahy těchto souborů nebudou překvapivé – není to nic, co jsme tu dosud neviděli.</p>
-
-		<br>
-
 		<div class=" code-block-wrapper">
 			<span class="code-block-wrapper__label-upper mono">PlayerMovement.cs</span>
 
@@ -130,32 +124,28 @@
 			<span class="code-block-wrapper__label-lower">Klikněte do bloku pro jeho zkopírování</span>
 	</div>
 
-	<br>
-
 	<div class=" code-block-wrapper">
 		<span class="code-block-wrapper__label-upper mono">CameraMovement.cs</span>
 
 		<pre onclick="copyToClipboard(this)" class="hljs"
 			style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(40, 40, 40); color: rgb(235, 219, 178);"><span class="hljs-keyword" style="color: rgb(251, 73, 52);">using</span> UnityEngine;
-		
-		<span class="hljs-keyword" style="color: rgb(251, 73, 52);">public</span> <span class="hljs-keyword" style="color: rgb(251, 73, 52);">class</span> <span class="hljs-title" style="color: rgb(131, 165, 152);">CameraMovement</span> : <span class="hljs-title" style="color: rgb(131, 165, 152);">MonoBehaviour</span>
-		{
-		    <span class="hljs-keyword" style="color: rgb(251, 73, 52);">float</span> Sensitivity = <span class="hljs-number" style="color: rgb(211, 134, 155);">10</span>f;
-		    <span class="hljs-function" style="color: rgb(142, 192, 124);"><span class="hljs-keyword" style="color: rgb(142, 192, 124);">void</span> <span class="hljs-title" style="color: rgb(131, 165, 152);">Update</span>(<span class="hljs-params" style="color: rgb(250, 189, 47);"></span>)
-		    </span>{
-		        <span class="hljs-keyword" style="color: rgb(251, 73, 52);">float</span> dx = Input.GetAxis(<span class="hljs-string" style="color: rgb(184, 187, 38);">"Mouse X"</span>);
-		        transform.eulerAngles += Vector3.up * dx * Sensitivity;
-		
-		        <span class="hljs-keyword" style="color: rgb(251, 73, 52);">float</span> dy = Input.GetAxis(<span class="hljs-string" style="color: rgb(184, 187, 38);">"Mouse Y"</span>);
-		        transform.eulerAngles += Vector3.left * dy * Sensitivity;
-		    }
-		}
-		</pre>
+
+<span class="hljs-keyword" style="color: rgb(251, 73, 52);">public</span> <span class="hljs-keyword" style="color: rgb(251, 73, 52);">class</span> <span class="hljs-title" style="color: rgb(131, 165, 152);">CameraMovement</span> : <span class="hljs-title" style="color: rgb(131, 165, 152);">MonoBehaviour</span>
+{
+	<span class="hljs-keyword" style="color: rgb(251, 73, 52);">float</span> Sensitivity = <span class="hljs-number" style="color: rgb(211, 134, 155);">10</span>f;
+	<span class="hljs-function" style="color: rgb(142, 192, 124);"><span class="hljs-keyword" style="color: rgb(142, 192, 124);">void</span> <span class="hljs-title" style="color: rgb(131, 165, 152);">Update</span>(<span class="hljs-params" style="color: rgb(250, 189, 47);"></span>)
+	</span>{
+		<span class="hljs-keyword" style="color: rgb(251, 73, 52);">float</span> dx = Input.GetAxis(<span class="hljs-string" style="color: rgb(184, 187, 38);">"Mouse X"</span>);
+		transform.eulerAngles += Vector3.up * dx * Sensitivity;
+
+		<span class="hljs-keyword" style="color: rgb(251, 73, 52);">float</span> dy = Input.GetAxis(<span class="hljs-string" style="color: rgb(184, 187, 38);">"Mouse Y"</span>);
+		transform.eulerAngles += Vector3.left * dy * Sensitivity;
+	}
+}
+</pre>
 
 		<span class="code-block-wrapper__label-lower">Klikněte do bloku pro jeho zkopírování</span>
 	</div>
-
-	<br>
 
 	<p>Následně tyto dva skripty adekvátně přiřadíme našim objektům:</p>
 	<ul>
@@ -163,15 +153,50 @@
 		<li><code>CameraMovement.cs</code> – objektu <i>Main Camera</i></li>
 	</ul>
 
-
-
 	</div>
 
 	<div class="content-section">
-		<h2 class="highlight-alt">Checkpoint 1 – funkční ovládání hráče</h2>
+		<div>
+			<h2 class="highlight-alt">Checkpoint 1 – funkční ovládání hráče</h2>
+			<p>Zkontrolujte si, že vám vše funguje – měli byste se moci pohybovat volně pomocí kláves WASD nebo šipek. Dopomůže vám kostka <i>Target</i> jakožto referenční bod.</p>
+		</div>
+		
+	</div>
 
-		<p>Zkontrolujte si, že vám vše funguje – měli byste se moci pohybovat volně pomocí kláves WASD nebo šipek.
-			Dopomůže vám kostka <i>Dummy</i> jakožto referenční bod.</p>
+	<div class="content-section">
+		<h2 class="highlight">Fáze 2 – funkční ovládání hráče</h2>
+
+		<div>
+			<p>Nyní vytvoříme samotnou překážkovou dráhu. Pro lehkou manipulovatelnost ji dáme do nového objektu. Přesuneme do ní též naší kostku <i>Target</i>. Dráhá by měla vypadat přibližně následovně:</p>
+			<img src="./media/phase2_1.png" alt="obrázek druhé">
+		</div>
+		
+		<div>
+			<p>Čiže naše dráha bude prozatím koridor, v němž se naskýtají mezi hráčem a cílem čtyři stěny. Po tomto rozšíření může vypadat strutura následovně:</p>
+			<ul class="cute-border">
+				<li>(<b>Directional Light</b>) Directional Light</li>
+				<li>(<b>Plane</b>) Plane</li>
+				<li> Player
+					<ul>
+						<li>(<b>Capsule</b>) PlayerBody</li>
+						<li>(<b>Cube</b>) PlayerFace</li>
+						<li>(<b>Camera</b>) Main Camera</li>
+					</ul>
+				</li>
+				<li>ObstacleCourse
+					<ul>
+						<li>(<b>Cube</b>) LeftWall</li>
+						<li>(<b>Cube</b>) RightWall</li>
+						<li>(<b>Cube</b>) Obstacle1</li>
+						<li>(<b>Cube</b>) Obstacle2</li>
+						<li>(<b>Cube</b>) Obstacle3</li>
+						<li>(<b>Cube</b>) Obstacle4</li>
+						<li>(<b>Cube</b>) Target</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		
 	</div>
 
 	<div class="DUMMY" style="height: 10em"></div>

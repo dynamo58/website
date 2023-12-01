@@ -86,12 +86,12 @@ pre,
 
 .highlight {
 	font-weight: bold;
-	color: var(--high-fg);
+	color: var(--high-fg) !important;
 }
 
 .highlight-alt {
 	font-weight: bold;
-	color: var(--sec-high-fg);
+	color: var(--sec-high-fg) !important;
 }
 
 .highlight-bigger {
@@ -104,17 +104,16 @@ pre,
 	margin-top: 2em;
 	padding-left: 1em;
 	padding-right: 1em;
+	display: flex;
+	flex-direction: column;
+	gap: 1em
 }
 
-.content-section>img {
+.content-section img {
 	max-width: 80%;
 	display: block;
 	margin: 1em auto;
 	border-radius: 1em;
-}
-
-.highlight-li {
-	color: var(--sec-high-fg);
 }
 
 .circ-boxed {
@@ -176,7 +175,6 @@ pre,
 	border-radius: 1em;
 	border: 1px solid #fff;
 	display: inline-block;
-	/* max-width: 30em; */
 }
 
 .green-tinted {
