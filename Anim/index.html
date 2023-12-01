@@ -33,7 +33,7 @@
 		<h2 class="highlight">Fáze 0 – prerekvizity</h2>
 
 		<ul>
-			<li>Vytvořte si v Unity Hubu nový 3D projekt – např. se jménem „Animace“</li>
+			<li>Vytvořte si v Unity Hubu nový 3D projekt – např. s názvem „Animace“</li>
 		</ul>
 	</div>
 
@@ -69,7 +69,7 @@
 		</div>
 		
 		<p>Obsahy těchto souborů nebudou překvapivé – není to nic, co jsme tu dosud neviděli.</p>
-		<div class=" code-block-wrapper">
+		<div class="code-block-wrapper">
 			<span class="code-block-wrapper__label-upper mono">PlayerMovement.cs</span>
 
 
@@ -197,7 +197,73 @@
 			</ul>
 		</div>
 		
+		<div>
+			<p>
+				Hráči a všem překážkovým objektům přidejte <b>Rigidbody</b>. Všem nastavte velkou hmotnost (např. 1000), aby nebylo možné s objekty hýbat. Hráči nezapomeňte uzamknout rotaci a pohyb kolem osy <b>y</b> (<code>Inspector → Rigidbody → Constraints</code> – zde zaškrtněte <code>Freeze Position</code> a <code>Freeze Rotation</code> pro osu <b>y</b>). Také mu nastavte úhlové tření na 1 (<code>Inspector → Rigidbody → Angular drag</code>) – jinak by se nám hráč náhodně mohl roztočit!
+			</p>
+		</div>
+
+		<div>
+			<p>Nyní už nám chybí poslední krok před animacemi – potřebujeme překážky nastavit tak, aby při kolizi s hráčem byl hráč poslán zpět na start.</p>
+
+			<p>Přidejte proto hráči (tj. GameObjektu <i>Player</i>) <b>Capsule collider</b> a všem překážkám <b>Box Collider</b>. Všem překážkám ještě přidejte tag <b>Obstacle</b>. Následně vytvořte skript <code>PlayerCollisionHandler.cs</code> s následujícím obsahem:</p>
+		</div>
+		<div class=" code-block-wrapper">
+			<span class="code-block-wrapper__label-upper mono">PlayerCollisionHandler.cs</span>
+	
+<pre onclick="copyToClipboard(this)" class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(40, 40, 40); color: rgb(235, 219, 178);"><span class="hljs-keyword" style="color: rgb(251, 73, 52);">using</span> UnityEngine;
+
+<span class="hljs-keyword" style="color: rgb(251, 73, 52);">public</span> <span class="hljs-keyword" style="color: rgb(251, 73, 52);">class</span> <span class="hljs-title" style="color: rgb(131, 165, 152);">PlayerCollisionHandler</span> : <span class="hljs-title" style="color: rgb(131, 165, 152);">MonoBehaviour</span>
+{
+	Rigidbody rb;
+
+	<span class="hljs-function" style="color: rgb(142, 192, 124);"><span class="hljs-keyword" style="color: rgb(142, 192, 124);">void</span> <span class="hljs-title" style="color: rgb(131, 165, 152);">Start</span>(<span class="hljs-params" style="color: rgb(250, 189, 47);"></span>)
+	</span>{
+		rb = GetComponent&lt;Rigidbody&gt;();
+	}
+
+	<span class="hljs-function" style="color: rgb(142, 192, 124);"><span class="hljs-keyword" style="color: rgb(142, 192, 124);">public</span> <span class="hljs-keyword" style="color: rgb(142, 192, 124);">void</span> <span class="hljs-title" style="color: rgb(131, 165, 152);">OnCollisionEnter</span>(<span class="hljs-params" style="color: rgb(250, 189, 47);">Collision collision</span>)
+	</span>{
+		<span class="hljs-keyword" style="color: rgb(251, 73, 52);">if</span> (collision.gameObject.CompareTag(<span class="hljs-string" style="color: rgb(184, 187, 38);">"Obstacle"</span>))
+		{
+			<span class="hljs-comment" style="color: rgb(146, 131, 116); font-style: italic;">// posuň hráče do výchozí polohy </span>
+			transform.position = <span class="hljs-keyword" style="color: rgb(251, 73, 52);">new</span> Vector3(START_X, START_Y, START_Z);
+			
+			<span class="hljs-comment" style="color: rgb(146, 131, 116); font-style: italic;">// vyresetuj jeho hybnost</span>
+			rb.velocity = Vector3.zero;
+			rb.angularVelocity = Vector3.zero;
+		}
+	}
+}
+</pre>
+			<span class="code-block-wrapper__label-lower">Klikněte do bloku pro jeho zkopírování</span>
+		</div>
+
+		<div>
+			<p>Tento skript jednoduše resetuje hráče na původní pozici, narazí-li do objektu s tagem <b>Obstacle</b>. <code>START_X, START_Y, START_Z</code> nastavte na původní pozici hráče ve vaší implementaci této překážkové dráhy.</p>
+		</div>
 	</div>
+
+	<div class="content-section">
+		<div>
+			<h2 class="highlight-alt">Checkpoint 2 – interakce hráče s okolím</h2>
+			<p>Zkontrolujte si, že hráč se může hýbat a narážet do stěn (nesmí jimi procházet). Zároveň se po kolizi s nimi náhodně neroztáčí. Také zkontrolujte, že narazíte-li do překážky, nikoliv do jedné ze stěn, tak jste resetováni zpátky na původní pozici</p>
+		</div>
+	</div>
+
+	<div class="content-section">
+		<div>
+			<h2 style="display: inline;height: 1em" class="highlight">Fáze 3 – konečně animujeme!  <img src="https://cdn.7tv.app/emote/63f557c1face0f3bbeaafa89/1x.webp" style="display: inline-block; width: 1em; height: 1em;border-radius: 0; margin: 0;" alt=""></h2>
+			<p>Zkontrolujte si, že hráč se může hýbat a narážet do stěn (nesmí jimi procházet). Zároveň se po kolizi s nimi náhodně neroztáčí. Také zkontrolujte, že narazíte-li do překážky, nikoliv do jedné ze stěn, tak jste resetováni zpátky na původní pozici</p>
+		</div>
+
+		<div>
+			<p>Manipulujeme-li pozici a budeme-li chtít stejnou animaci použít u více objektů, musíme tyto objekty „obalit“ speciálním hierarchickým <b>GameObject</b>em, tím předejdeme problému s absolutním umísťováním.</p>
+			<p>Vyberme nyní nejpřednější překážku a otevřme editor animací – <code></code></p>
+		</div>
+
+	</div>
+
 
 	<div class="DUMMY" style="height: 10em"></div>
 </body>

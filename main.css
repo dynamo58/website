@@ -143,6 +143,7 @@ pre,
 
 .code-block-wrapper>pre {
 	padding: .5em;
+	tab-size: 4;
 }
 
 .code-block-wrapper__label-upper {
