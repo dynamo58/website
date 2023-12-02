@@ -182,3 +182,11 @@ pre,
 	transition: background-color 0.3s ease;
 	background-color: #00ff0033 !important;
 }
+
+.blue-tint {
+	background-color: #258dd333 !important;
+}
+
+.red-tint {
+	background-color: #d3252533 !important;
+}

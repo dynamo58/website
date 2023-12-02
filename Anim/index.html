@@ -22,11 +22,11 @@
 </head>
 
 <body>
-	<h1 class="highligh" style="border-bottom: 1px solid #fff">Animace a animační křivky (pá 15. 12. 2023) [<a class="highlight" href="./slides/">prez</a>]</h1>
+	<h2 class="highligh" style="border-bottom: 1px solid #fff">Animace a animační křivky (pá 15. 12. 2023) [<a class="highlight" href="./slides/">prez</a>]</h2>
 
 	<div class="content-section">
 		<p>Dnešním ultimátním cílem bude postavit překážkovou dráhou s pohyblivými prvky.</p>
-		<!-- TODO: web{p,m} videa "finálního produktu"  -->
+		<img src="./media/final-preview.webp" alt="">
 	</div>
 
 	<div class="content-section">
@@ -49,7 +49,6 @@
 				<li> Player
 					<ul>
 						<li>(<b>Capsule</b>) PlayerBody</li>
-						<li>(<b>Cube</b>) PlayerFace</li>
 						<li>(<b>Camera</b>) Main Camera</li>
 					</ul>
 				</li>
@@ -164,22 +163,24 @@
 	</div>
 
 	<div class="content-section">
-		<h2 class="highlight">Fáze 2 – funkční ovládání hráče</h2>
-
 		<div>
-			<p>Nyní vytvoříme samotnou překážkovou dráhu. Pro lehkou manipulovatelnost ji dáme do nového objektu. Přesuneme do ní též naší kostku <i>Target</i>. Dráhá by měla vypadat přibližně následovně:</p>
-			<img src="./media/phase2_1.png" alt="obrázek druhé">
+			<h2 class="highlight">Fáze 2 – výstavba překážkové dráhy</h2>
+
+			<div>
+				<p>Nyní vytvoříme samotnou překážkovou dráhu. Pro lehkou manipulovatelnost ji dáme do nového objektu. Přesuneme do ní též naší kostku <i>Target</i>. Dráhá by měla vypadat přibližně následovně:</p>
+				<img src="./media/phase2_1.png" alt="obrázek druhé">
+			</div>
 		</div>
 		
+		
 		<div>
-			<p>Čiže naše dráha bude prozatím koridor, v němž se naskýtají mezi hráčem a cílem čtyři stěny. Po tomto rozšíření může vypadat strutura následovně:</p>
+			<p>Překážky budeme chtít dle všeho identické, použijeme proto <b>Prefab</b>. Ale z důvodů, který bude vyjasněn později budeme vyžadovat, aby měli všechny tyto překážky souřadnice [0,0,0]. Obalíme je tedy prázdným <b>GameObject</b>em, kterému pak dáváme souřadnice, které chceme. Naše dráha bude prozatím koridor, v němž se naskýtají mezi hráčem a cílem čtyři identické překážky. Po tomto rozšíření může vypadat strutura následovně:</p>
 			<ul class="cute-border">
 				<li>(<b>Directional Light</b>) Directional Light</li>
 				<li>(<b>Plane</b>) Plane</li>
 				<li> Player
 					<ul>
 						<li>(<b>Capsule</b>) PlayerBody</li>
-						<li>(<b>Cube</b>) PlayerFace</li>
 						<li>(<b>Camera</b>) Main Camera</li>
 					</ul>
 				</li>
@@ -187,10 +188,30 @@
 					<ul>
 						<li>(<b>Cube</b>) LeftWall</li>
 						<li>(<b>Cube</b>) RightWall</li>
-						<li>(<b>Cube</b>) Obstacle1</li>
-						<li>(<b>Cube</b>) Obstacle2</li>
-						<li>(<b>Cube</b>) Obstacle3</li>
-						<li>(<b>Cube</b>) Obstacle4</li>
+						<li>
+							<span class="blue-tint">ObstacleWrapper</span>
+							<ul>
+								<li>(<b>Cube</b>) Obstacle</li>
+							</ul>
+						</li>
+						<li>
+							<span class="blue-tint">ObstacleWrapper (1)</span>
+							<ul>
+								<li>(<b>Cube</b>) Obstacle</li>
+							</ul>
+						</li>
+						<li>
+							<span class="blue-tint">ObstacleWrapper (2)</span>
+							<ul>
+								<li>(<b>Cube</b>) Obstacle</li>
+							</ul>
+						</li>
+						<li>
+							<span class="blue-tint">ObstacleWrapper (3)</span>
+							<ul>
+								<li>(<b>Cube</b>) Obstacle</li>
+							</ul>
+						</li>
 						<li>(<b>Cube</b>) Target</li>
 					</ul>
 				</li>
@@ -199,14 +220,14 @@
 		
 		<div>
 			<p>
-				Hráči a všem překážkovým objektům přidejte <b>Rigidbody</b>. Všem nastavte velkou hmotnost (např. 1000), aby nebylo možné s objekty hýbat. Hráči nezapomeňte uzamknout rotaci a pohyb kolem osy <b>y</b> (<code>Inspector → Rigidbody → Constraints</code> – zde zaškrtněte <code>Freeze Position</code> a <code>Freeze Rotation</code> pro osu <b>y</b>). Také mu nastavte úhlové tření na 1 (<code>Inspector → Rigidbody → Angular drag</code>) – jinak by se nám hráč náhodně mohl roztočit!
+				Hráči přidejte <b>Rigidbody</b> a nastavte mu v něm velké úhlové tření (<b>Angular drag</b>) a uzamkněte mu pohyb a rotaci v ose <b>y</b>. Postraním stěnám dejte také <b>Rigidbody</b> a naprosto uzamkněte jejich pozici a rotaci.
 			</p>
 		</div>
 
 		<div>
 			<p>Nyní už nám chybí poslední krok před animacemi – potřebujeme překážky nastavit tak, aby při kolizi s hráčem byl hráč poslán zpět na start.</p>
 
-			<p>Přidejte proto hráči (tj. GameObjektu <i>Player</i>) <b>Capsule collider</b> a všem překážkám <b>Box Collider</b>. Všem překážkám ještě přidejte tag <b>Obstacle</b>. Následně vytvořte skript <code>PlayerCollisionHandler.cs</code> s následujícím obsahem:</p>
+			<p>Přidejte proto hráči (tj. GameObjektu <i>Player</i>) <b>Capsule collider</b>. V prefabu překážek dejte přímo kvádru ještě tag <b>Obstacle</b> a <b>Box Collider</b>. Následně vytvořte skript <code>PlayerCollisionHandler.cs</code> s následujícím obsahem:</p>
 		</div>
 		<div class=" code-block-wrapper">
 			<span class="code-block-wrapper__label-upper mono">PlayerCollisionHandler.cs</span>
@@ -258,12 +279,25 @@
 		</div>
 
 		<div>
-			<p>Manipulujeme-li pozici a budeme-li chtít stejnou animaci použít u více objektů, musíme tyto objekty „obalit“ speciálním hierarchickým <b>GameObject</b>em, tím předejdeme problému s absolutním umísťováním.</p>
-			<p>Vyberme nyní nejpřednější překážku a otevřme editor animací – <code></code></p>
+			<p>Vyberme nyní nejpřednější překážku (na samotný kvádr, nikoliv jeho obal) a otevřme editor animací z {<code>Window → Animation → Animation}</code>. Otevře se nám nové okno, v němž poklikáme <b>Create</b>. Tím si v assetech vytvoříme novou animaci, pojmenujme ji napříkad <i>ObstacleMovement</i>.</p>
+			<p class="red-tint">TODO: popis UI + vysvětlení nutnosti wrapperů, keyframes, křivek, …</p>
 		</div>
 
+		<div>
+			<p>Pokud jsme již s animací spokojeni, odebereme ji z původního objektu, na kterém jsme ji testovali a přidáme ji do našeho prefabu. Jdeme tedy do editoru prefabu, přidáme komponent <b>Animation</b> a v tomto komponentě vybereme naší animaci <b>ObstacleMovement</b>. S prefaby se však chovají animace trochu specificki, musíme proto samotnou aplikaci ještě opravit, a to následovně. V okně s assety na ni poklikáme a v inspektoru se pomocí třech teček překlikneme do <b>Debug mode</b>.  Zde nastavíme <b>Wrap mode</b> na <b>Loop</b> a zaškrtneme tlačítko <b>Legacy mode</b>.</p>
+		</div>
+
+		<div>
+			<P>Nyní by nám již hra měla fungovat!</P>
+		</div>
 	</div>
 
+	<div class="content-section">
+		<div>
+			<h2 class="highlight-alt">Checkpoint 3 – kontrola funkčnosti hry</h2>
+			<p>Zkontrolujte si, zda vám hra funguje! Nejasnosti?</p>
+		</div>
+	</div>
 
 	<div class="DUMMY" style="height: 10em"></div>
 </body>
