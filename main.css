@@ -22,14 +22,9 @@
 	margin: 0;
 }
 
-/* * {
-	border: 1px solid red
-} */
-
 html {
 	margin-left: auto;
 	margin-right: auto;
-	margin-top: 1em;
 	max-width: 800px;
 }
 
@@ -59,17 +54,38 @@ pre,
 -------------------
 */
 
-.heading {
+nav {
+	background-color: var(--seco-bg);
+	position: sticky;
+	top: 0;
+	max-width: 800px;
+	padding: 0.5em;
+	border-bottom-left-radius: 1em;
+	border-bottom-right-radius: 1em;
+	display: flex;
+	justify-content: left;
+	gap: 0.5em;
+	margin-bottom: 3em;
+}
+
+nav .location {
+	color: var(--sec-high-fg);
+}
+
+header {
 	display: flex;
 	gap: 1em;
 	padding-bottom: 1em;
 	border-bottom: 1px solid #fff;
+	margin-top: 1.5em;
 }
 
 .heading__img {
 	border-radius: 1em;
 	margin: 1em;
-	border: 3px solid var(--high-fg)
+	border: 3px solid var(--high-fg);
+	width: 200px;
+	height: 156px;
 }
 
 .heading__content {
@@ -79,9 +95,19 @@ pre,
 }
 
 .heading__text {
+	display: block;
 	align-self: center;
 	margin-left: auto;
 	margin-right: auto;
+}
+
+.home__footer {
+	border-top: 1px solid #fff;
+	padding-top: 0.5em
+}
+
+.light-border {
+	border-bottom: 1px solid #fff;
 }
 
 .highlight {
@@ -179,7 +205,6 @@ pre,
 }
 
 .green-tinted {
-	transition: background-color 0.3s ease;
 	background-color: #00ff0033 !important;
 }
 
@@ -189,4 +214,78 @@ pre,
 
 .red-tint {
 	background-color: #d3252533 !important;
+}
+
+.no-user-select {
+	user-select: none;
+}
+
+.article-heading {
+	display: inline;
+	height: 1em;
+}
+
+.article-schmol-img {
+	display: inline-block;
+	width: 1em;
+	height: 1em;
+	border-radius: 0;
+	margin: 0;
+}
+
+.centered-warning {
+	text-align: center;
+	padding: 3em;
+	font-weight: bolder;
+	text-transform: uppercase;
+}
+
+.dummy-spacer {
+	height: 10em;
+}
+
+/* 
+-------------------
+	code blocks gruvbox theme
+-------------------
+*/
+pre {
+	transition: background-color 0.3s ease;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	padding: 0.5em;
+	background: rgb(40, 40, 40);
+	color: rgb(235, 219, 178);
+}
+
+.hljs-keyword {
+	color: rgb(251, 73, 52);
+}
+
+.hljs-title {
+	color: rgb(131, 165, 152);
+}
+
+.hljs-number {
+	color: rgb(211, 134, 155);
+}
+
+.hljs-function {
+	color: rgb(142, 192, 124);
+}
+
+.hljs-params {
+	color: rgb(250, 189, 47);
+}
+
+.hljs-comment {
+	color: rgb(146, 131, 116);
+	font-style: italic;
+}
+
+.hljs-string {
+	color: rgb(184, 187, 38);
 }

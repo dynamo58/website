@@ -22,12 +22,20 @@
 </head>
 
 <body>
-	<h2 class="highligh" style="border-bottom: 1px solid #fff">Animace a animační křivky (pá 15. 12. 2023) [<a
-			class="highlight" href="./slides/">prez</a>]</h2>
+	<nav class="mono">
+		<span class="location">
+			<a href="/">~</a>
+		</span>
+		<span class="no-user-select"> >> </span>
+		<span class="location">
+			<a href="anim">anim</a>
+		</span>
+	</nav>
+	<h2 class="highligh light-border">Animace a animační křivky (pá 15. 12. 2023)</h2>
 
 	<div class="content-section">
 		<p>Dnešním ultimátním cílem bude postavit překážkovou dráhou s pohyblivými prvky.</p>
-		<img src="./media/final-preview.webp" alt="">
+		<img src="./media/final-preview.webp" alt="finální podoba">
 	</div>
 
 	<div class="content-section">
@@ -74,47 +82,46 @@
 				<span class="code-block-wrapper__label-upper mono">PlayerMovement.cs</span>
 
 
-				<pre onclick="copyToClipboard(this)" class="hljs"
-					style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(40, 40, 40); color: rgb(235, 219, 178);"><span class="hljs-keyword" style="color: rgb(251, 73, 52);">using</span> UnityEngine;
+				<pre onclick="copyToClipboard(this)" class="hljs"><span class="hljs-keyword">using</span> UnityEngine;
 
-<span class="hljs-keyword" style="color: rgb(251, 73, 52);">public</span> <span class="hljs-keyword" style="color: rgb(251, 73, 52);">class</span> <span class="hljs-title" style="color: rgb(131, 165, 152);">PlayerMovement</span> : <span class="hljs-title" style="color: rgb(131, 165, 152);">MonoBehaviour</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">PlayerMovement</span> : <span class="hljs-title">MonoBehaviour</span>
 {
-    <span class="hljs-keyword" style="color: rgb(251, 73, 52);">float</span> Speed = <span class="hljs-number" style="color: rgb(211, 134, 155);">5</span>f;
-    <span class="hljs-function" style="color: rgb(142, 192, 124);"><span class="hljs-keyword" style="color: rgb(142, 192, 124);">private</span> <span class="hljs-keyword" style="color: rgb(142, 192, 124);">void</span> <span class="hljs-title" style="color: rgb(131, 165, 152);">Update</span>(<span class="hljs-params" style="color: rgb(250, 189, 47);"></span>)
+    <span class="hljs-keyword">float</span> Speed = <span class="hljs-number">5</span>f;
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Update</span>(<span class="hljs-params"></span>)
     </span>{
-        <span class="hljs-keyword" style="color: rgb(251, 73, 52);">if</span> (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
+        <span class="hljs-keyword">if</span> (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
         {
-            <span class="hljs-keyword" style="color: rgb(251, 73, 52);">this</span>.transform.position += Speed * Time.deltaTime * <span class="hljs-keyword" style="color: rgb(251, 73, 52);">new</span> Vector3(
+            <span class="hljs-keyword">this</span>.transform.position += Speed * Time.deltaTime * <span class="hljs-keyword">new</span> Vector3(
                 Camera.main.transform.forward.x,
-                <span class="hljs-number" style="color: rgb(211, 134, 155);">0</span>,
+                <span class="hljs-number">0</span>,
                 Camera.main.transform.forward.z
             );
         }
 
-        <span class="hljs-keyword" style="color: rgb(251, 73, 52);">if</span> (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
+        <span class="hljs-keyword">if</span> (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
         {
-            <span class="hljs-keyword" style="color: rgb(251, 73, 52);">this</span>.transform.position -= Speed * Time.deltaTime * <span class="hljs-keyword" style="color: rgb(251, 73, 52);">new</span> Vector3(
+            <span class="hljs-keyword">this</span>.transform.position -= Speed * Time.deltaTime * <span class="hljs-keyword">new</span> Vector3(
                 Camera.main.transform.forward.x,
-                <span class="hljs-number" style="color: rgb(211, 134, 155);">0</span>,
+                <span class="hljs-number">0</span>,
                 Camera.main.transform.forward.z
             );
         }
 
-        <span class="hljs-keyword" style="color: rgb(251, 73, 52);">if</span> (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
+        <span class="hljs-keyword">if</span> (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
         {
             
-            <span class="hljs-keyword" style="color: rgb(251, 73, 52);">this</span>.transform.position -= Speed * Time.deltaTime * <span class="hljs-keyword" style="color: rgb(251, 73, 52);">new</span> Vector3(
+            <span class="hljs-keyword">this</span>.transform.position -= Speed * Time.deltaTime * <span class="hljs-keyword">new</span> Vector3(
                 Camera.main.transform.right.x,
-                <span class="hljs-number" style="color: rgb(211, 134, 155);">0</span>,
+                <span class="hljs-number">0</span>,
                 Camera.main.transform.right.z
             );
         }
 
-        <span class="hljs-keyword" style="color: rgb(251, 73, 52);">if</span> (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
+        <span class="hljs-keyword">if</span> (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
         {
-            <span class="hljs-keyword" style="color: rgb(251, 73, 52);">this</span>.transform.position += Speed * Time.deltaTime * <span class="hljs-keyword" style="color: rgb(251, 73, 52);">new</span> Vector3(
+            <span class="hljs-keyword">this</span>.transform.position += Speed * Time.deltaTime * <span class="hljs-keyword">new</span> Vector3(
                 Camera.main.transform.right.x,
-                <span class="hljs-number" style="color: rgb(211, 134, 155);">0</span>,
+                <span class="hljs-number">0</span>,
                 Camera.main.transform.right.z
             );
         }
@@ -128,18 +135,17 @@
 		<div class=" code-block-wrapper">
 			<span class="code-block-wrapper__label-upper mono">CameraMovement.cs</span>
 
-			<pre onclick="copyToClipboard(this)" class="hljs"
-				style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(40, 40, 40); color: rgb(235, 219, 178);"><span class="hljs-keyword" style="color: rgb(251, 73, 52);">using</span> UnityEngine;
+			<pre onclick="copyToClipboard(this)" class="hljs"><span class="hljs-keyword">using</span> UnityEngine;
 
-<span class="hljs-keyword" style="color: rgb(251, 73, 52);">public</span> <span class="hljs-keyword" style="color: rgb(251, 73, 52);">class</span> <span class="hljs-title" style="color: rgb(131, 165, 152);">CameraMovement</span> : <span class="hljs-title" style="color: rgb(131, 165, 152);">MonoBehaviour</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">CameraMovement</span> : <span class="hljs-title">MonoBehaviour</span>
 {
-	<span class="hljs-keyword" style="color: rgb(251, 73, 52);">float</span> Sensitivity = <span class="hljs-number" style="color: rgb(211, 134, 155);">10</span>f;
-	<span class="hljs-function" style="color: rgb(142, 192, 124);"><span class="hljs-keyword" style="color: rgb(142, 192, 124);">void</span> <span class="hljs-title" style="color: rgb(131, 165, 152);">Update</span>(<span class="hljs-params" style="color: rgb(250, 189, 47);"></span>)
+	<span class="hljs-keyword">float</span> Sensitivity = <span class="hljs-number">10</span>f;
+	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Update</span>(<span class="hljs-params"></span>)
 	</span>{
-		<span class="hljs-keyword" style="color: rgb(251, 73, 52);">float</span> dx = Input.GetAxis(<span class="hljs-string" style="color: rgb(184, 187, 38);">"Mouse X"</span>);
+		<span class="hljs-keyword">float</span> dx = Input.GetAxis(<span class="hljs-string">"Mouse X"</span>);
 		transform.eulerAngles += Vector3.up * dx * Sensitivity;
 
-		<span class="hljs-keyword" style="color: rgb(251, 73, 52);">float</span> dy = Input.GetAxis(<span class="hljs-string" style="color: rgb(184, 187, 38);">"Mouse Y"</span>);
+		<span class="hljs-keyword">float</span> dy = Input.GetAxis(<span class="hljs-string">"Mouse Y"</span>);
 		transform.eulerAngles += Vector3.left * dy * Sensitivity;
 	}
 }
@@ -246,26 +252,25 @@
 		<div class=" code-block-wrapper">
 			<span class="code-block-wrapper__label-upper mono">PlayerCollisionHandler.cs</span>
 
-			<pre onclick="copyToClipboard(this)" class="hljs"
-				style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(40, 40, 40); color: rgb(235, 219, 178);"><span class="hljs-keyword" style="color: rgb(251, 73, 52);">using</span> UnityEngine;
+			<pre onclick="copyToClipboard(this)" class="hljs"><span class="hljs-keyword">using</span> UnityEngine;
 
-<span class="hljs-keyword" style="color: rgb(251, 73, 52);">public</span> <span class="hljs-keyword" style="color: rgb(251, 73, 52);">class</span> <span class="hljs-title" style="color: rgb(131, 165, 152);">PlayerCollisionHandler</span> : <span class="hljs-title" style="color: rgb(131, 165, 152);">MonoBehaviour</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">PlayerCollisionHandler</span> : <span class="hljs-title">MonoBehaviour</span>
 {
 	Rigidbody rb;
 
-	<span class="hljs-function" style="color: rgb(142, 192, 124);"><span class="hljs-keyword" style="color: rgb(142, 192, 124);">void</span> <span class="hljs-title" style="color: rgb(131, 165, 152);">Start</span>(<span class="hljs-params" style="color: rgb(250, 189, 47);"></span>)
+	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Start</span>(<span class="hljs-params"></span>)
 	</span>{
 		rb = GetComponent&lt;Rigidbody&gt;();
 	}
 
-	<span class="hljs-function" style="color: rgb(142, 192, 124);"><span class="hljs-keyword" style="color: rgb(142, 192, 124);">public</span> <span class="hljs-keyword" style="color: rgb(142, 192, 124);">void</span> <span class="hljs-title" style="color: rgb(131, 165, 152);">OnCollisionEnter</span>(<span class="hljs-params" style="color: rgb(250, 189, 47);">Collision collision</span>)
+	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">OnCollisionEnter</span>(<span class="hljs-params">Collision collision</span>)
 	</span>{
-		<span class="hljs-keyword" style="color: rgb(251, 73, 52);">if</span> (collision.gameObject.CompareTag(<span class="hljs-string" style="color: rgb(184, 187, 38);">"Obstacle"</span>))
+		<span class="hljs-keyword">if</span> (collision.gameObject.CompareTag(<span class="hljs-string">"Obstacle"</span>))
 		{
-			<span class="hljs-comment" style="color: rgb(146, 131, 116); font-style: italic;">// posuň hráče do výchozí polohy </span>
-			transform.position = <span class="hljs-keyword" style="color: rgb(251, 73, 52);">new</span> Vector3(START_X, START_Y, START_Z);
+			<span class="hljs-comment">// posuň hráče do výchozí polohy </span>
+			transform.position = <span class="hljs-keyword">new</span> Vector3(START_X, START_Y, START_Z);
 			
-			<span class="hljs-comment" style="color: rgb(146, 131, 116); font-style: italic;">// vyresetuj jeho hybnost</span>
+			<span class="hljs-comment">// vyresetuj jeho hybnost</span>
 			rb.velocity = Vector3.zero;
 			rb.angularVelocity = Vector3.zero;
 		}
@@ -294,9 +299,8 @@
 
 	<div class="content-section">
 		<div>
-			<h2 style="display: inline;height: 1em" class="highlight">Fáze 3 – konečně animujeme! <img
-					src="./media/yip.webp"
-					style="display: inline-block; width: 1em; height: 1em;border-radius: 0; margin: 0;" alt=""></h2>
+			<h2 class="highlight article-heading">Fáze 3 – konečně animujeme! <img src="./media/yip.webp" alt="yip"
+					class="article-schmol-img"></h2>
 			<p>Zkontrolujte si, že hráč se může hýbat a narážet do stěn (nesmí jimi procházet). Zároveň se po kolizi s
 				nimi náhodně neroztáčí. Také zkontrolujte, že narazíte-li do překážky, nikoliv do jedné ze stěn, tak
 				jste resetováni zpátky na původní pozici</p>
@@ -309,8 +313,7 @@
 		</div>
 
 		<div>
-			<p class="red-tint"
-				style="text-align: center; padding: 3em; font-weight: bolder;text-transform: uppercase;">popis UI +
+			<p class="red-tint centered-warning">popis UI +
 				vysvětlení
 				nutnosti wrapperů, keyframes, křivek, …
 			</p>
@@ -337,7 +340,7 @@
 		</div>
 	</div>
 
-	<div class="DUMMY" style="height: 10em"></div>
+	<div class="DUMMY" class="dummy-spacer"></div>
 </body>
 
 </html>

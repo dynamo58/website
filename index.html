@@ -5,23 +5,23 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<link rel="icon" href="/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="/media/favicon.ico" type="image/x-icon">
 	<link rel="stylesheet" href="main.css">
 
 	<title>smolik.xyz</title>
 </head>
 
 <body>
-	<div class="heading">
+	<header>
 		<script>
 			const IMGS = ["guh.webp", "melon.webp"];
 			const rand_idx = Math.floor(Math.random() * (IMGS.length));
 
-			document.write(`<img src="/${IMGS[rand_idx]}" style="width:200px; height: 156px;" class="heading__img"  alt="cute animal" />`)
+			document.write(`<img src="/media/${IMGS[rand_idx]}" class="heading__img"  alt="cute animal" />`)
 		</script>
 
 		<div class="heading__content">
-			<p class="heading__text" style="display: block">
+			<p class="heading__text">
 				<s></s><span class="highlight-bigger">Ahoj!</span> Narazil/a jsi na
 				webovou stránku <span class="highlight">Marka
 					Smolíka</span>. To jsi ale asi věděl/a, jinak bys tu nebyl/a.
@@ -32,14 +32,14 @@
 				day.
 				You teach him to have to fish you give him…</span>
 		</div>
-	</div>
+	</header>
 
 	<div class="content-section">
 		<div>
 			<span class="highlight-bigger">Projekty</span>, které tu žijí
 			<ul class="spaced-lis">
 				<li>
-					<a href="/anim">
+					<a href="/anim.html">
 						<span class="circ-boxed">Animace a animační křivky v Unity</span>
 						<span class="">(08. 12. 23)</span>
 					</a>
@@ -86,11 +86,9 @@
 		</div>
 	</div>
 
-	<div class="content-section" style="border-top: 1px solid #fff;padding-top:0.5em">
+	<div class="content-section home__footer">
 		<p>
 			Poslední aktualizace: 8. 12. 23<br>
-			Cokoliv ohledně jejího obsahu adresujte na <a target="_blank"
-				href="https://github.com/dynamo58/website" class="circ-boxed">její repozitář</a>.
 		</p>
 	</div>
 </body>
