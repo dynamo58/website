@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<link rel="icon" href="./media/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="./favicon.ico" type="image/x-icon">
 	<link rel="stylesheet" href="./main.css">
 
 	<title>smolik.xyz</title>
@@ -13,12 +13,7 @@
 
 <body>
 	<header>
-		<script>
-			const IMGS = ["guh.webp", "melon.webp"];
-			const rand_idx = Math.floor(Math.random() * (IMGS.length));
-
-			document.write(`<img src="./media/${IMGS[rand_idx]}" class="heading__img"  alt="cute animal" />`)
-		</script>
+		<img id="headingAnimal" src="./guh.webp" alt="cute animal">
 
 		<div class="heading__content">
 			<p class="heading__text">
@@ -39,9 +34,15 @@
 			<span class="highlight-bigger">Projekty</span>, které tu žijí
 			<ul class="spaced-lis">
 				<li>
-					<a href="/anim.html">
+					<a href="./anim.html">
 						<span class="circ-boxed">Animace a animační křivky v Unity</span>
-						<span class="">(08. 12. 23)</span>
+						<span>(08. 12. 23)</span>
+					</a>
+				</li>
+				<li>
+					<a href="./utrzky.html">
+						<span class="circ-boxed">Matematické útržky</span>
+						<span>(09. 12. 23)</span>
 					</a>
 				</li>
 			</ul>
@@ -81,14 +82,13 @@
 						class="circ-boxed">MFF CUNI</a>
 				</li>
 				<li>🏃 🚴 🖥 📔</li>
-				<li><a target="_blank" href="/pgp.txt" class="circ-boxed">můj PGP klíč</a></li>
 			</ul>
 		</div>
 	</div>
 
 	<div class="content-section home__footer">
 		<p>
-			Poslední aktualizace: 8. 12. 23<br>
+			Poslední aktualizace: 10. 12. 23<br>
 		</p>
 	</div>
 </body>

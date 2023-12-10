@@ -1,346 +1,353 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cs">
 
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="./main.css">
-
-	<script>
-		async function copyToClipboard(el) {
-			await navigator.clipboard.writeText(el.textContent);
-
-			el.classList.toggle("green-tinted");
-
-			setTimeout(() => {
-				el.classList.toggle("green-tinted");
-			}, 1000);
-		}
-	</script>
-
 	<title>Animace a animační křivky | smolik.xyz</title>
 </head>
 
 <body>
 	<nav class="mono">
-		<span class="location">
-			<a href="/">~</a>
-		</span>
-		<span class="no-user-select"> >> </span>
-		<span class="location">
-			<a href="anim">anim</a>
-		</span>
+		<div class="left-flex">
+			<span class="location">
+				<a href="./index.html">~</a>
+			</span>
+			<span class="no-user-select"> >> </span>
+			<span class="location">
+				<a href="./anim.html">anim</a>
+			</span>
+		</div>
+		<div class="right-flex">
+			<span class="location">
+				<a href="./utrzky.html">utrzky</a>
+			</span>
+			<span class="no-user-select"> || </span>
+			<span class="location">
+				<a href="./anim.html">anim</a>
+			</span>
+		</div>
 	</nav>
-	<h2 class="highligh light-border">Animace a animační křivky (pá 15. 12. 2023)</h2>
 
-	<div class="content-section">
-		<p>Dnešním ultimátním cílem bude postavit překážkovou dráhou s pohyblivými prvky.</p>
-		<img src="./media/final-preview.webp" alt="finální podoba">
-	</div>
+	<article class="has-dummy-space-below">
+		<h2 class="highligh light-border">Animace a animační křivky (pá 15. 12. 2023)</h2>
+		<section class="content-section">
+			<h2 class="highlight">Fáze 0 – prerekvizity</h2>
 
-	<div class="content-section">
-		<h2 class="highlight">Fáze 0 – prerekvizity</h2>
-
-		<ul>
-			<li>Vytvořte si v Unity Hubu nový 3D projekt – např. s názvem „Animace“</li>
-		</ul>
-	</div>
-
-	<div class="content-section">
-		<h2 class="highlight">Fáze 1 – základní objekty</h2>
-		<div>
-			<p>
-				Vytvořte si klasický scénář – kapsulový hráč s first-person kamerou na ploše. Vaše hierarchie hierarchie
-				nechť vypadá následovně:
-			</p>
-			<ul class="cute-border">
-				<li>(<b>Directional Light</b>) Directional Light</li>
-				<li>(<b>Plane</b>) Plane</li>
-				<li> Player
-					<ul>
-						<li>(<b>Capsule</b>) PlayerBody</li>
-						<li>(<b>Camera</b>) Main Camera</li>
-					</ul>
-				</li>
-				<li>(<b>Cube</b>) Target</li>
+			<ul>
+				<li>Vytvořte si v Unity Hubu nový 3D projekt – např. s názvem „Animace“</li>
 			</ul>
-		</div>
+		</section>
 
-		<div>
-			<p>Podoba by poté měla být příbližně následující:</p>
-			<img src="./media/phase1_1.png" alt="obrázek první podoby">
+		<section class="content-section">
+			<h2 class="highlight">Fáze 1 – základní objekty</h2>
+			<div>
+				<p>
+					Vytvořte si klasický scénář – kapsulový hráč s first-person kamerou na ploše. Vaše hierarchie
+					hierarchie
+					nechť vypadá následovně:
+				</p>
+				<ul class="cute-border">
+					<li>(<b>Directional Light</b>) Directional Light</li>
+					<li>(<b>Plane</b>) Plane</li>
+					<li> Player
+						<ul>
+							<li>(<b>Capsule</b>) PlayerBody</li>
+							<li>(<b>Camera</b>) Main Camera</li>
+						</ul>
+					</li>
+					<li>(<b>Cube</b>) Target</li>
+				</ul>
+			</div>
 
-			<p>Hráče potřebujeme nyní rozhýbat – vytvoříme dva skripty:</p>
-			<ul class="cute-border"">
-				<li><code>PlayerMovement.cs</code> – ovládání hráče pomocí šipek nebo WASD</li>
-				<li><code>CameraMovement.cs</code> – hýbání kamery pomocí pohybů myši</li>
-			</ul>
-		</div>
-		
-		<p>Obsahy těchto souborů nebudou překvapivé – není to nic, co jsme tu dosud neviděli.</p>
-		<div class=" code-block-wrapper">
+			<div>
+				<p>Podoba by poté měla být příbližně následující:</p>
+				<img src="./phase1_1.png" alt="obrázek první podoby">
+
+				<p>Hráče potřebujeme nyní rozhýbat – vytvoříme dva skripty:</p>
+				<ul class="cute-border">
+					<li><code>PlayerMovement.cs</code> – ovládání hráče pomocí šipek nebo WASD</li>
+					<li><code>CameraMovement.cs</code> – hýbání kamery pomocí pohybů myši</li>
+				</ul>
+			</div>
+
+			<p>Obsahy těchto souborů nebudou překvapivé – není to nic, co jsme tu dosud neviděli.</p>
+			<div class=" code-block-wrapper">
 				<span class="code-block-wrapper__label-upper mono">PlayerMovement.cs</span>
 
 
-				<pre onclick="copyToClipboard(this)" class="hljs"><span class="hljs-keyword">using</span> UnityEngine;
+				<pre class="hljs"><span class="hljs-keyword">using</span> UnityEngine;
 
-<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">PlayerMovement</span> : <span class="hljs-title">MonoBehaviour</span>
-{
-    <span class="hljs-keyword">float</span> Speed = <span class="hljs-number">5</span>f;
-    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Update</span>(<span class="hljs-params"></span>)
-    </span>{
-        <span class="hljs-keyword">if</span> (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
-        {
-            <span class="hljs-keyword">this</span>.transform.position += Speed * Time.deltaTime * <span class="hljs-keyword">new</span> Vector3(
-                Camera.main.transform.forward.x,
-                <span class="hljs-number">0</span>,
-                Camera.main.transform.forward.z
-            );
-        }
+	<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">PlayerMovement</span> : <span class="hljs-title">MonoBehaviour</span>
+	{
+		<span class="hljs-keyword">float</span> Speed = <span class="hljs-number">5</span>f;
+		<span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Update</span>(<span class="hljs-params"></span>)
+		</span>{
+			<span class="hljs-keyword">if</span> (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
+			{
+				<span class="hljs-keyword">this</span>.transform.position += Speed * Time.deltaTime * <span class="hljs-keyword">new</span> Vector3(
+					Camera.main.transform.forward.x,
+					<span class="hljs-number">0</span>,
+					Camera.main.transform.forward.z
+				);
+			}
 
-        <span class="hljs-keyword">if</span> (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
-        {
-            <span class="hljs-keyword">this</span>.transform.position -= Speed * Time.deltaTime * <span class="hljs-keyword">new</span> Vector3(
-                Camera.main.transform.forward.x,
-                <span class="hljs-number">0</span>,
-                Camera.main.transform.forward.z
-            );
-        }
+			<span class="hljs-keyword">if</span> (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
+			{
+				<span class="hljs-keyword">this</span>.transform.position -= Speed * Time.deltaTime * <span class="hljs-keyword">new</span> Vector3(
+					Camera.main.transform.forward.x,
+					<span class="hljs-number">0</span>,
+					Camera.main.transform.forward.z
+				);
+			}
 
-        <span class="hljs-keyword">if</span> (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
-        {
-            
-            <span class="hljs-keyword">this</span>.transform.position -= Speed * Time.deltaTime * <span class="hljs-keyword">new</span> Vector3(
-                Camera.main.transform.right.x,
-                <span class="hljs-number">0</span>,
-                Camera.main.transform.right.z
-            );
-        }
+			<span class="hljs-keyword">if</span> (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
+			{
+				
+				<span class="hljs-keyword">this</span>.transform.position -= Speed * Time.deltaTime * <span class="hljs-keyword">new</span> Vector3(
+					Camera.main.transform.right.x,
+					<span class="hljs-number">0</span>,
+					Camera.main.transform.right.z
+				);
+			}
 
-        <span class="hljs-keyword">if</span> (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
-        {
-            <span class="hljs-keyword">this</span>.transform.position += Speed * Time.deltaTime * <span class="hljs-keyword">new</span> Vector3(
-                Camera.main.transform.right.x,
-                <span class="hljs-number">0</span>,
-                Camera.main.transform.right.z
-            );
-        }
-    }
-}
-</pre>
-
-				<span class="code-block-wrapper__label-lower">Klikněte do bloku pro jeho zkopírování</span>
-		</div>
-
-		<div class=" code-block-wrapper">
-			<span class="code-block-wrapper__label-upper mono">CameraMovement.cs</span>
-
-			<pre onclick="copyToClipboard(this)" class="hljs"><span class="hljs-keyword">using</span> UnityEngine;
-
-<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">CameraMovement</span> : <span class="hljs-title">MonoBehaviour</span>
-{
-	<span class="hljs-keyword">float</span> Sensitivity = <span class="hljs-number">10</span>f;
-	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Update</span>(<span class="hljs-params"></span>)
-	</span>{
-		<span class="hljs-keyword">float</span> dx = Input.GetAxis(<span class="hljs-string">"Mouse X"</span>);
-		transform.eulerAngles += Vector3.up * dx * Sensitivity;
-
-		<span class="hljs-keyword">float</span> dy = Input.GetAxis(<span class="hljs-string">"Mouse Y"</span>);
-		transform.eulerAngles += Vector3.left * dy * Sensitivity;
-	}
-}
-</pre>
-
-			<span class="code-block-wrapper__label-lower">Klikněte do bloku pro jeho zkopírování</span>
-		</div>
-
-		<p>Následně tyto dva skripty adekvátně přiřadíme našim objektům:</p>
-		<ul>
-			<li><code>PlayerMovement.cs</code> – objektu <i>Player</i></li>
-			<li><code>CameraMovement.cs</code> – objektu <i>Main Camera</i></li>
-		</ul>
-
-	</div>
-
-	<div class="content-section">
-		<div>
-			<h2 class="highlight-alt">Checkpoint 1 – funkční ovládání hráče</h2>
-			<p>Zkontrolujte si, že vám vše funguje – měli byste se moci pohybovat volně pomocí kláves WASD nebo šipek.
-				Dopomůže vám kostka <i>Target</i> jakožto referenční bod.</p>
-		</div>
-
-	</div>
-
-	<div class="content-section">
-		<div>
-			<h2 class="highlight">Fáze 2 – výstavba překážkové dráhy</h2>
-
-			<div>
-				<p>Nyní vytvoříme samotnou překážkovou dráhu. Pro lehkou manipulovatelnost ji dáme do nového objektu.
-					Přesuneme do ní též naší kostku <i>Target</i>. Dráhá by měla vypadat přibližně následovně:</p>
-				<img src="./media/phase2_1.png" alt="obrázek druhé">
-			</div>
-		</div>
-
-
-		<div>
-			<p>Překážky budeme chtít dle všeho identické, použijeme proto <b>Prefab</b>. Ale z důvodů, který bude
-				vyjasněn později budeme vyžadovat, aby měli všechny tyto překážky souřadnice [0,0,0]. Obalíme je tedy
-				prázdným <b>GameObject</b>em, kterému pak dáváme souřadnice, které chceme. Naše dráha bude prozatím
-				koridor, v němž se naskýtají mezi hráčem a cílem čtyři identické překážky. Po tomto rozšíření může
-				vypadat strutura následovně:</p>
-			<ul class="cute-border">
-				<li>(<b>Directional Light</b>) Directional Light</li>
-				<li>(<b>Plane</b>) Plane</li>
-				<li> Player
-					<ul>
-						<li>(<b>Capsule</b>) PlayerBody</li>
-						<li>(<b>Camera</b>) Main Camera</li>
-					</ul>
-				</li>
-				<li>ObstacleCourse
-					<ul>
-						<li>(<b>Cube</b>) LeftWall</li>
-						<li>(<b>Cube</b>) RightWall</li>
-						<li>
-							<span class="blue-tint">ObstacleWrapper</span>
-							<ul>
-								<li>(<b>Cube</b>) Obstacle</li>
-							</ul>
-						</li>
-						<li>
-							<span class="blue-tint">ObstacleWrapper (1)</span>
-							<ul>
-								<li>(<b>Cube</b>) Obstacle</li>
-							</ul>
-						</li>
-						<li>
-							<span class="blue-tint">ObstacleWrapper (2)</span>
-							<ul>
-								<li>(<b>Cube</b>) Obstacle</li>
-							</ul>
-						</li>
-						<li>
-							<span class="blue-tint">ObstacleWrapper (3)</span>
-							<ul>
-								<li>(<b>Cube</b>) Obstacle</li>
-							</ul>
-						</li>
-						<li>(<b>Cube</b>) Target</li>
-					</ul>
-				</li>
-			</ul>
-		</div>
-
-		<div>
-			<p>
-				Hráči přidejte <b>Rigidbody</b> a nastavte mu v něm velké úhlové tření (<b>Angular drag</b>) a uzamkněte
-				mu pohyb a rotaci v ose <b>y</b>. Postraním stěnám dejte také <b>Rigidbody</b> a naprosto uzamkněte
-				jejich pozici a rotaci.
-			</p>
-		</div>
-
-		<div>
-			<p>Nyní už nám chybí poslední krok před animacemi – potřebujeme překážky nastavit tak, aby při kolizi s
-				hráčem byl hráč poslán zpět na start.</p>
-
-			<p>Přidejte proto hráči (tj. GameObjektu <i>Player</i>) <b>Capsule collider</b>. V prefabu překážek dejte
-				přímo kvádru ještě tag <b>Obstacle</b> a <b>Box Collider</b>. Následně vytvořte skript
-				<code>PlayerCollisionHandler.cs</code> s následujícím obsahem:
-			</p>
-		</div>
-		<div class=" code-block-wrapper">
-			<span class="code-block-wrapper__label-upper mono">PlayerCollisionHandler.cs</span>
-
-			<pre onclick="copyToClipboard(this)" class="hljs"><span class="hljs-keyword">using</span> UnityEngine;
-
-<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">PlayerCollisionHandler</span> : <span class="hljs-title">MonoBehaviour</span>
-{
-	Rigidbody rb;
-
-	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Start</span>(<span class="hljs-params"></span>)
-	</span>{
-		rb = GetComponent&lt;Rigidbody&gt;();
-	}
-
-	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">OnCollisionEnter</span>(<span class="hljs-params">Collision collision</span>)
-	</span>{
-		<span class="hljs-keyword">if</span> (collision.gameObject.CompareTag(<span class="hljs-string">"Obstacle"</span>))
-		{
-			<span class="hljs-comment">// posuň hráče do výchozí polohy </span>
-			transform.position = <span class="hljs-keyword">new</span> Vector3(START_X, START_Y, START_Z);
-			
-			<span class="hljs-comment">// vyresetuj jeho hybnost</span>
-			rb.velocity = Vector3.zero;
-			rb.angularVelocity = Vector3.zero;
+			<span class="hljs-keyword">if</span> (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
+			{
+				<span class="hljs-keyword">this</span>.transform.position += Speed * Time.deltaTime * <span class="hljs-keyword">new</span> Vector3(
+					Camera.main.transform.right.x,
+					<span class="hljs-number">0</span>,
+					Camera.main.transform.right.z
+				);
+			}
 		}
 	}
-}
-</pre>
-			<span class="code-block-wrapper__label-lower">Klikněte do bloku pro jeho zkopírování</span>
-		</div>
+	</pre>
 
-		<div>
-			<p>Tento skript jednoduše resetuje hráče na původní pozici, narazí-li do objektu s tagem <b>Obstacle</b>.
-				<code>START_X, START_Y, START_Z</code> nastavte na původní pozici hráče ve vaší implementaci této
-				překážkové dráhy.
-			</p>
-		</div>
-	</div>
+				<span class="code-block-wrapper__label-lower">Klikněte do bloku pro jeho zkopírování</span>
+			</div>
 
-	<div class="content-section">
-		<div>
-			<h2 class="highlight-alt">Checkpoint 2 – interakce hráče s okolím</h2>
-			<p>Zkontrolujte si, že hráč se může hýbat a narážet do stěn (nesmí jimi procházet). Zároveň se po kolizi s
-				nimi náhodně neroztáčí. Také zkontrolujte, že narazíte-li do překážky, nikoliv do jedné ze stěn, tak
-				jste resetováni zpátky na původní pozici</p>
-		</div>
-	</div>
+			<div class=" code-block-wrapper">
+				<span class="code-block-wrapper__label-upper mono">CameraMovement.cs</span>
 
-	<div class="content-section">
-		<div>
-			<h2 class="highlight article-heading">Fáze 3 – konečně animujeme! <img class="article-schmol-img"
-					src="./media/yip.webp" alt=""></h2>
-			<p>Zkontrolujte si, že hráč se může hýbat a narážet do stěn (nesmí jimi procházet). Zároveň se po kolizi s
-				nimi náhodně neroztáčí. Také zkontrolujte, že narazíte-li do překážky, nikoliv do jedné ze stěn, tak
-				jste resetováni zpátky na původní pozici</p>
-		</div>
+				<pre class="hljs"><span class="hljs-keyword">using</span> UnityEngine;
 
-		<div>
-			<p>Vyberme nyní nejpřednější překážku (na samotný kvádr, nikoliv jeho obal) a otevřme editor animací z
-				{<code>Window → Animation → Animation}</code>. Otevře se nám nové okno, v němž poklikáme <b>Create</b>.
-				Tím si v assetech vytvoříme novou animaci, pojmenujme ji napříkad <i>ObstacleMovement</i>.</p>
-		</div>
+	<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">CameraMovement</span> : <span class="hljs-title">MonoBehaviour</span>
+	{
+		<span class="hljs-keyword">float</span> Sensitivity = <span class="hljs-number">10</span>f;
+		<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Update</span>(<span class="hljs-params"></span>)
+		</span>{
+			<span class="hljs-keyword">float</span> dx = Input.GetAxis(<span class="hljs-string">"Mouse X"</span>);
+			transform.eulerAngles += Vector3.up * dx * Sensitivity;
 
-		<div>
-			<p class="red-tint centered-warning">popis UI +
-				vysvětlení
-				nutnosti wrapperů, keyframes, křivek, …
-			</p>
-		</div>
+			<span class="hljs-keyword">float</span> dy = Input.GetAxis(<span class="hljs-string">"Mouse Y"</span>);
+			transform.eulerAngles += Vector3.left * dy * Sensitivity;
+		}
+	}
+	</pre>
 
-		<div>
-			<p>Pokud jsme již s animací spokojeni, odebereme ji z původního objektu, na kterém jsme ji testovali a
-				přidáme ji do našeho prefabu. Jdeme tedy do editoru prefabu, přidáme komponent <b>Animation</b> a v
-				tomto komponentě vybereme naší animaci <b>ObstacleMovement</b>. S prefaby se však chovají animace trochu
-				specificki, musíme proto samotnou aplikaci ještě opravit, a to následovně. V okně s assety na ni
-				poklikáme a v inspektoru se pomocí třech teček překlikneme do <b>Debug mode</b>. Zde nastavíme <b>Wrap
-					mode</b> na <b>Loop</b> a zaškrtneme tlačítko <b>Legacy mode</b>.</p>
-		</div>
+				<span class="code-block-wrapper__label-lower">Klikněte do bloku pro jeho zkopírování</span>
+			</div>
 
-		<div>
-			<P>Nyní by nám již hra měla fungovat!</P>
-		</div>
-	</div>
+			<p>Následně tyto dva skripty adekvátně přiřadíme našim objektům:</p>
+			<ul>
+				<li><code>PlayerMovement.cs</code> – objektu <i>Player</i></li>
+				<li><code>CameraMovement.cs</code> – objektu <i>Main Camera</i></li>
+			</ul>
 
-	<div class="content-section">
-		<div>
-			<h2 class="highlight-alt">Checkpoint 3 – kontrola funkčnosti hry</h2>
-			<p>Zkontrolujte si, zda vám hra funguje! Nejasnosti?</p>
-		</div>
-	</div>
+		</section>
 
-	<div class="DUMMY" class="dummy-spacer"></div>
+		<section class="content-section">
+			<div>
+				<h2 class="highlight-alt">Checkpoint 1 – funkční ovládání hráče</h2>
+				<p>Zkontrolujte si, že vám vše funguje – měli byste se moci pohybovat volně pomocí kláves WASD nebo
+					šipek.
+					Dopomůže vám kostka <i>Target</i> jakožto referenční bod.</p>
+			</div>
+
+		</section>
+
+		<section class="content-section">
+			<div>
+				<h2 class="highlight">Fáze 2 – výstavba překážkové dráhy</h2>
+
+				<div>
+					<p>Nyní vytvoříme samotnou překážkovou dráhu. Pro lehkou manipulovatelnost ji dáme do nového
+						objektu.
+						Přesuneme do ní též naší kostku <i>Target</i>. Dráhá by měla vypadat přibližně následovně:</p>
+					<img src="./phase2_1.png" alt="obrázek druhé">
+				</div>
+			</div>
+
+
+			<div>
+				<p>Překážky budeme chtít dle všeho identické, použijeme proto <b>Prefab</b>. Ale z důvodů, který bude
+					vyjasněn později budeme vyžadovat, aby měli všechny tyto překážky souřadnice [0,0,0]. Obalíme je
+					tedy
+					prázdným <b>GameObject</b>em, kterému pak dáváme souřadnice, které chceme. Naše dráha bude prozatím
+					koridor, v němž se naskýtají mezi hráčem a cílem čtyři identické překážky. Po tomto rozšíření může
+					vypadat strutura následovně:</p>
+				<ul class="cute-border">
+					<li>(<b>Directional Light</b>) Directional Light</li>
+					<li>(<b>Plane</b>) Plane</li>
+					<li> Player
+						<ul>
+							<li>(<b>Capsule</b>) PlayerBody</li>
+							<li>(<b>Camera</b>) Main Camera</li>
+						</ul>
+					</li>
+					<li>ObstacleCourse
+						<ul>
+							<li>(<b>Cube</b>) LeftWall</li>
+							<li>(<b>Cube</b>) RightWall</li>
+							<li>
+								<span class="blue-tint">ObstacleWrapper</span>
+								<ul>
+									<li>(<b>Cube</b>) Obstacle</li>
+								</ul>
+							</li>
+							<li>
+								<span class="blue-tint">ObstacleWrapper (1)</span>
+								<ul>
+									<li>(<b>Cube</b>) Obstacle</li>
+								</ul>
+							</li>
+							<li>
+								<span class="blue-tint">ObstacleWrapper (2)</span>
+								<ul>
+									<li>(<b>Cube</b>) Obstacle</li>
+								</ul>
+							</li>
+							<li>
+								<span class="blue-tint">ObstacleWrapper (3)</span>
+								<ul>
+									<li>(<b>Cube</b>) Obstacle</li>
+								</ul>
+							</li>
+							<li>(<b>Cube</b>) Target</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+
+			<div>
+				<p>
+					Hráči přidejte <b>Rigidbody</b> a nastavte mu v něm velké úhlové tření (<b>Angular drag</b>) a
+					uzamkněte
+					mu pohyb a rotaci v ose <b>y</b>. Postraním stěnám dejte také <b>Rigidbody</b> a naprosto uzamkněte
+					jejich pozici a rotaci.
+				</p>
+			</div>
+
+			<div>
+				<p>Nyní už nám chybí poslední krok před animacemi – potřebujeme překážky nastavit tak, aby při kolizi s
+					hráčem byl hráč poslán zpět na start.</p>
+
+				<p>Přidejte proto hráči (tj. GameObjektu <i>Player</i>) <b>Capsule collider</b>. V prefabu překážek
+					dejte
+					přímo kvádru ještě tag <b>Obstacle</b> a <b>Box Collider</b>. Následně vytvořte skript
+					<code>PlayerCollisionHandler.cs</code> s následujícím obsahem:
+				</p>
+			</div>
+			<div class=" code-block-wrapper">
+				<span class="code-block-wrapper__label-upper mono">PlayerCollisionHandler.cs</span>
+
+				<pre class="hljs"><span class="hljs-keyword">using</span> UnityEngine;
+
+	<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">PlayerCollisionHandler</span> : <span class="hljs-title">MonoBehaviour</span>
+	{
+		Rigidbody rb;
+
+		<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Start</span>(<span class="hljs-params"></span>)
+		</span>{
+			rb = GetComponent&lt;Rigidbody&gt;();
+		}
+
+		<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">OnCollisionEnter</span>(<span class="hljs-params">Collision collision</span>)
+		</span>{
+			<span class="hljs-keyword">if</span> (collision.gameObject.CompareTag(<span class="hljs-string">"Obstacle"</span>))
+			{
+				<span class="hljs-comment">// posuň hráče do výchozí polohy </span>
+				transform.position = <span class="hljs-keyword">new</span> Vector3(START_X, START_Y, START_Z);
+				
+				<span class="hljs-comment">// vyresetuj jeho hybnost</span>
+				rb.velocity = Vector3.zero;
+				rb.angularVelocity = Vector3.zero;
+			}
+		}
+	}
+	</pre>
+				<span class="code-block-wrapper__label-lower">Klikněte do bloku pro jeho zkopírování</span>
+			</div>
+
+			<div>
+				<p>Tento skript jednoduše resetuje hráče na původní pozici, narazí-li do objektu s tagem
+					<b>Obstacle</b>.
+					<code>START_X, START_Y, START_Z</code> nastavte na původní pozici hráče ve vaší implementaci této
+					překážkové dráhy.
+				</p>
+			</div>
+		</section>
+
+		<section class="content-section">
+			<div>
+				<h2 class="highlight-alt">Checkpoint 2 – interakce hráče s okolím</h2>
+				<p>Zkontrolujte si, že hráč se může hýbat a narážet do stěn (nesmí jimi procházet). Zároveň se po kolizi
+					s
+					nimi náhodně neroztáčí. Také zkontrolujte, že narazíte-li do překážky, nikoliv do jedné ze stěn, tak
+					jste resetováni zpátky na původní pozici</p>
+			</div>
+		</section>
+
+		<section class="content-section">
+			<div>
+				<h2 class="highlight article-heading">Fáze 3 – konečně animujeme! <img class="article-schmol-img"
+						src="./yip.webp" alt=""></h2>
+				<p>Zkontrolujte si, že hráč se může hýbat a narážet do stěn (nesmí jimi procházet). Zároveň se po kolizi
+					s
+					nimi náhodně neroztáčí. Také zkontrolujte, že narazíte-li do překážky, nikoliv do jedné ze stěn, tak
+					jste resetováni zpátky na původní pozici</p>
+			</div>
+
+			<div>
+				<p>Vyberme nyní nejpřednější překážku (na samotný kvádr, nikoliv jeho obal) a otevřme editor animací z
+					{<code>Window → Animation → Animation}</code>. Otevře se nám nové okno, v němž poklikáme
+					<b>Create</b>.
+					Tím si v assetech vytvoříme novou animaci, pojmenujme ji napříkad <i>ObstacleMovement</i>.
+				</p>
+			</div>
+
+			<div>
+				<p class="red-tint centered-warning">popis UI +
+					vysvětlení
+					nutnosti wrapperů, keyframes, křivek, …
+				</p>
+			</div>
+
+			<div>
+				<p>Pokud jsme již s animací spokojeni, odebereme ji z původního objektu, na kterém jsme ji testovali a
+					přidáme ji do našeho prefabu. Jdeme tedy do editoru prefabu, přidáme komponent <b>Animation</b> a v
+					tomto komponentě vybereme naší animaci <b>ObstacleMovement</b>. S prefaby se však chovají animace
+					trochu
+					specificki, musíme proto samotnou aplikaci ještě opravit, a to následovně. V okně s assety na ni
+					poklikáme a v inspektoru se pomocí třech teček překlikneme do <b>Debug mode</b>. Zde nastavíme
+					<b>Wrap
+						mode</b> na <b>Loop</b> a zaškrtneme tlačítko <b>Legacy mode</b>.
+				</p>
+			</div>
+
+			<div>
+				<P>Nyní by nám již hra měla fungovat!</P>
+			</div>
+		</section>
+
+		<section class="content-section">
+			<div>
+				<h2 class="highlight-alt">Checkpoint 3 – kontrola funkčnosti hry</h2>
+				<p>Zkontrolujte si, zda vám hra funguje! Nejasnosti?</p>
+			</div>
+		</section>
+	</article>
 </body>
 
 </html>
