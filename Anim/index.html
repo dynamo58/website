@@ -234,11 +234,10 @@
 		</div>
 
 		<div>
-			<p>Nyní už nám chybí poslední krok před animacemi – potřebujeme překážky nastavit tak, aby při kolizi s
-				hráčem byl hráč poslán zpět na start.</p>
+			<p>Nyní už nám chybí poslední krok před animacemi – potřebujeme překážky nastavit tak, aby při kolizi s hráčem byl hráč poslán zpět na start.</p>
 
-			<p>Přidejte proto hráči (tj. GameObjektu <i>Player</i>) <b>Capsule collider</b>. V prefabu překážek dejte
-				přímo kvádru ještě tag <b>Obstacle</b> a <b>Box Collider</b>. Následně vytvořte skript
+			<p>V prefabu překážek dejte
+				přímo kvádru (tj. vnitřnímu objektu) ještě tag <b>Obstacle</b>. Následně vytvořte skript
 				<code>PlayerCollisionHandler.cs</code> s následujícím obsahem:
 			</p>
 		</div>
@@ -277,7 +276,7 @@
 		<div>
 			<p>Tento skript jednoduše resetuje hráče na původní pozici, narazí-li do objektu s tagem <b>Obstacle</b>.
 				<code>START_X, START_Y, START_Z</code> nastavte na původní pozici hráče ve vaší implementaci této
-				překážkové dráhy.
+				překážkové dráhy. Přidejte ho objektu <i>Player</i>.
 			</p>
 		</div>
 	</div>
@@ -286,8 +285,8 @@
 		<div>
 			<h2 class="highlight-alt">Checkpoint 2 – interakce hráče s okolím</h2>
 			<p>Zkontrolujte si, že hráč se může hýbat a narážet do stěn (nesmí jimi procházet). Zároveň se po kolizi s
-				nimi náhodně neroztáčí. Také zkontrolujte, že narazíte-li do překážky, nikoliv do jedné ze stěn, tak
-				jste resetováni zpátky na původní pozici</p>
+				nimi náhodně neroztáčí. Také zkontrolujte, že narazíte-li do překážky ( nikoliv do jedné ze stěn), tak
+				jste resetováni zpátky na původní pozici.</p>
 		</div>
 	</div>
 
