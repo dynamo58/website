@@ -1,98 +1,118 @@
 <!DOCTYPE html>
 <html lang="cs">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="main.css" />
 
-	<link rel="icon" href="/favicon.ico" type="image/x-icon">
-	<link rel="stylesheet" href="main.css">
+    <title>smolik.xyz</title>
+  </head>
 
-	<title>smolik.xyz</title>
-</head>
+  <body>
+    <div class="heading">
+      <script>
+        const IMGS = ["guh.webp", "melon.webp"];
+        const rand_idx = Math.floor(Math.random() * IMGS.length);
 
-<body>
-	<div class="heading">
-		<script>
-			const IMGS = ["guh.webp", "melon.webp"];
-			const rand_idx = Math.floor(Math.random() * (IMGS.length));
+        document.write(
+          `<img src="/${IMGS[rand_idx]}" style="width:200px; height: 156px;" class="heading__img"  alt="cute animal" />`
+        );
+      </script>
 
-			document.write(`<img src="/${IMGS[rand_idx]}" style="width:200px; height: 156px;" class="heading__img"  alt="cute animal" />`)
-		</script>
+      <div class="heading__content">
+        <p class="heading__text" style="display: block">
+          <s></s><span class="highlight-bigger">Ahoj!</span> Narazil/a jsi na
+          webovou stránku <span class="highlight">Marka Smolíka</span>. To jsi
+          ale asi věděl/a, jinak bys tu nebyl/a.
+        </p>
+        <span class="quote"
+          >&nbsp;&nbsp;&nbsp;You give a poor man a fish and you feed him for a
+          day. You teach him to have to fish you give him…</span
+        >
+      </div>
+    </div>
 
-		<div class="heading__content">
-			<p class="heading__text" style="display: block">
-				<s></s><span class="highlight-bigger">Ahoj!</span> Narazil/a jsi na
-				webovou stránku <span class="highlight">Marka
-					Smolíka</span>. To jsi ale asi věděl/a, jinak bys tu nebyl/a.
-			</p>
-			<span class="quote">&nbsp;&nbsp;&nbsp;You
-				give a poor man a fish
-				and you feed him for a
-				day.
-				You teach him to have to fish you give him…</span>
-		</div>
-	</div>
+    <div class="content-section">
+      <div>
+        <span class="highlight-bigger">Projekty</span>, které tu žijí
+        <ul class="spaced-lis">
+          <li>
+            <a href="/anim">
+              <span class="circ-boxed">Animace a animační křivky v Unity</span>
+              <span class="">(08. 12. 23)</span>
+            </a>
+          </li>
+          <li>
+            <a href="/snap">
+              <span class="circ-boxed">Zběžně o snap!u</span>
+              <span class="">(21. 03. 24)</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
 
-	<div class="content-section">
-		<div>
-			<span class="highlight-bigger">Projekty</span>, které tu žijí
-			<ul class="spaced-lis">
-				<li>
-					<a href="/anim">
-						<span class="circ-boxed">Animace a animační křivky v Unity</span>
-						<span class="">(08. 12. 23)</span>
-					</a>
-				</li>
-			</ul>
-		</div>
-	</div>
+    <div class="content-section">
+      <div>
+        <span class="highlight-bigger">Odkazy</span>
+        <ul class="spaced-lis">
+          <li>
+            <span>
+              <a target="_blank" href="https://github.com/dynamo58"
+                >GitHub @ <span class="circ-boxed">dynamo58</span></a
+              >
+            </span>
+          </li>
+          <li>
+            <span> Discord @ <code>spalovac_mrtvol</code> </span>
+          </li>
+          <li>
+            <span> pošta @ <code>marek3smolik(na)seznam(tečka)cz</code> </span>
+          </li>
+        </ul>
+      </div>
+    </div>
 
-	<div class="content-section">
-		<div>
-			<span class="highlight-bigger">Odkazy</span>
-			<ul class="spaced-lis">
-				<li>
-					<span>
-						<a target="_blank" href="https://github.com/dynamo58">GitHub @ <span
-								class="circ-boxed">dynamo58</span></a>
-					</span>
-				</li>
-				<li>
-					<span>
-						Discord @ <code>spalovac_mrtvol</code>
-					</span>
-				</li>
-				<li>
-					<span>
-						pošta @ <code>marek3smolik(na)seznam(tečka)cz</code>
-					</span>
-				</li>
-			</ul>
-		</div>
-	</div>
+    <div class="content-section">
+      <div>
+        <span class="highlight-bigger">O mně</span>
+        <ul class="spaced-lis">
+          <li>je mi 20 let</li>
+          <li>
+            studuji matematiku a informatiku na
+            <a
+              target="_blank"
+              href="https://www.mff.cuni.cz/en"
+              class="circ-boxed"
+              >MFF CUNI</a
+            >
+          </li>
+          <li>🏃 🚴 🖥 📔</li>
+          <li>
+            <a target="_blank" href="/pgp.txt" class="circ-boxed"
+              >můj PGP klíč</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
 
-	<div class="content-section">
-		<div>
-			<span class="highlight-bigger">O mně</span>
-			<ul class="spaced-lis">
-				<li> je mi 20 let</li>
-				<li>studuji matematiku a informatiku na <a target="_blank" href="https://www.mff.cuni.cz/en"
-						class="circ-boxed">MFF CUNI</a>
-				</li>
-				<li>🏃 🚴 🖥 📔</li>
-				<li><a target="_blank" href="/pgp.txt" class="circ-boxed">můj PGP klíč</a></li>
-			</ul>
-		</div>
-	</div>
-
-	<div class="content-section" style="border-top: 1px solid #fff;padding-top:0.5em">
-		<p>
-			Poslední aktualizace: 8. 12. 23<br>
-			Cokoliv ohledně jejího obsahu adresujte na <a target="_blank" href="https://github.com/dynamo58/website"
-				class="circ-boxed">její repozitář</a>.
-		</p>
-	</div>
-</body>
-
+    <div
+      class="content-section"
+      style="border-top: 1px solid #fff; padding-top: 0.5em"
+    >
+      <p>
+        Poslední aktualizace: 8. 12. 23<br />
+        Cokoliv ohledně jejího obsahu adresujte na
+        <a
+          target="_blank"
+          href="https://github.com/dynamo58/website"
+          class="circ-boxed"
+          >její repozitář</a
+        >.
+      </p>
+    </div>
+  </body>
 </html>
