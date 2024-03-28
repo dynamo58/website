@@ -1,0 +1,566 @@
+<h2 class="highlight">Obecně o LaTeXu</h2>
+
+<p>
+  <a href="https://www.latex-project.org/">LaTeX</a> je sada maker nad TeX-em –
+  programem pro počítačovou sazbu původně vyvinutým Donaldem Knuthem. Jedná se
+  už dlouhá léta o standard pro tvorbu seriózních dokumentů v technických
+  oborem, jako je matematika či fyzika – a to z dobrých důvodů. Avšak původnímu
+  TeXu je bezmála 50, LaTeX (ač je do současné doby aktualizován) na tom se
+  svými téměr 40 není o moc lépe.
+</p>
+
+<p>
+  Tato skutečnost těžce prokládá některé z problémů, které z mého pohledu celý
+  tento systém má.
+</p>
+
+<p>
+  <b>Úmluva: </b>V následujícím textu budu celý systém ohledně TeXu, LaTeXu a
+  souvisejících komponent označovat jako „TeX“.
+</p>
+
+<h2 class="highlight">Co dělá LaTeX skvělým</h2>
+
+<p>
+  Nejprve však; co je na tomto systému tak dobré? Tak zaprvné se jedná o
+  transparentní <b>open-source</b> systém. Nic není proprietárního, dokumenty
+  samotné se píší do <b>plaintext</b>ových souborů s příponou <code>.tex</code>.
+  To zajišťuje interoperabilitu s dalšímy systémy. Obsah nepodléhá TeXu.
+  Uživatel s ním může nakládat jak chce a nedostane se mu žádných obfuskací.
+</p>
+
+<p>
+  Další faktor vychází přímo z mantry TeXu. Nejedná se totiž o hloupý textový
+  editor. V textovém editoru jako Microsoft Word dochází totiž k jakési fúzi
+  mezi vzhledem a obsahem dokumentu. To má za důsledek, že při psaní obsahu se
+  uživatel musí neustále zaobírat vzhledem a náležitě formátovat. Nastane
+  obzvláště peklo v případě, že si jasně nerozmyslel všechny potřebné styly na
+  začátku a náležitě je nenastavil.
+</p>
+
+<p>
+  TeX je jiný. <b>Obsah a vzhled jsou diametrálně odlišné</b> komponenty,
+  přičemž vzhled jde do pozadí a obsah do popředí.
+</p>
+
+<p>Jakási šablona dokumentu může vypadat následovně:</p>
+<!-- HTML generated using hilite.me -->
+<div
+  style="
+    background: #ffffff00;
+    overflow: auto;
+    width: auto;
+    border: solid gray;
+    border-width: 0.1em 0.1em 0.1em 0.8em;
+    padding: 0.2em 0.6em;
+  "
+>
+  <pre
+    style="margin: 0; line-height: 125%"
+  ><span style="color: #008800; font-weight: bold">\documentclass</span><span style="color: #007020">{</span>article<span style="color: #007020">}</span> <span style="color: #888888">% preset pro typ dokumentu</span>
+
+<span style="color: #888888">% importování balíčků</span>
+
+<span style="color: #888888">% nastavování stylů</span>
+
+<span style="color: #888888">% další parametry dokumentu</span>
+
+<span style="color: #008800; font-weight: bold">\begin</span><span style="color: #007020">{</span>document<span style="color: #007020">}</span>
+
+<span style="color: #888888">% obsah dokumentu</span>
+
+<span style="color: #008800; font-weight: bold">\end</span><span style="color: #007020">{</span>document<span style="color: #007020">}</span>
+</pre>
+</div>
+
+<p>A demonstrativní příklad by mohl vypadat následovně:</p>
+<!-- HTML generated using hilite.me -->
+<div
+  style="
+    background: #f8f8f800;
+    overflow: auto;
+    width: auto;
+    border: solid gray;
+    border-width: 0.1em 0.1em 0.1em 0.8em;
+    padding: 0.2em 0.6em;
+  "
+>
+  <pre
+    style="margin: 0; line-height: 125%"
+  ><span style="color: #008000; font-weight: bold">\documentclass</span><span style="color: #008000">{</span>article<span style="color: #008000">}</span> <span style="color: #408080; font-style: italic">% preset pro typ dokumentu</span>
+
+<span style="color: #408080; font-style: italic">% ====================</span>
+<span style="color: #408080; font-style: italic">% importování balíčků</span>
+
+<span style="color: #008000; font-weight: bold">\usepackage</span><span style="color: #008000">{</span>geometry<span style="color: #008000">}</span>
+
+<span style="color: #008000; font-weight: bold">\usepackage</span><span style="color: #7D9029">[utf8]</span><span style="color: #008000">{</span>inputenc<span style="color: #008000">}</span> <span style="color: #408080; font-style: italic">% podpora pro</span>
+<span style="color: #008000; font-weight: bold">\usepackage</span><span style="color: #7D9029">[czech]</span><span style="color: #008000">{</span>babel<span style="color: #008000">}</span>   <span style="color: #408080; font-style: italic">% čeština</span>
+
+<span style="color: #408080; font-style: italic">% ====================</span>
+<span style="color: #408080; font-style: italic">% nastavování stylů</span>
+
+<span style="color: #408080; font-style: italic">% makro z balíčku `geometry`</span>
+<span style="color: #408080; font-style: italic">% nastaví příslušná odsazení od okrajů stránky</span>
+<span style="color: #008000; font-weight: bold">\geometry</span><span style="color: #008000">{</span>
+    top=1in,
+    bottom=1.5in,
+    left=1.25in,
+    right=1.25in
+<span style="color: #008000">}</span>
+
+<span style="color: #008000; font-weight: bold">\setlength</span><span style="color: #008000">{</span><span style="color: #008000; font-weight: bold">\parindent</span><span style="color: #008000">}{</span>0mm<span style="color: #008000">}</span> <span style="color: #408080; font-style: italic">% odsazení 1. řádku odstavců</span>
+<span style="color: #008000; font-weight: bold">\setlength</span><span style="color: #008000">{</span><span style="color: #008000; font-weight: bold">\parskip</span><span style="color: #008000">}{</span>6pt<span style="color: #008000">}</span> <span style="color: #408080; font-style: italic">% mezera mezi odstavci</span>
+
+<span style="color: #008000; font-weight: bold">\title</span><span style="color: #008000">{</span>Můj první dokument v <span style="color: #008000; font-weight: bold">\LaTeX</span>-u<span style="color: #008000">}</span>
+<span style="color: #008000; font-weight: bold">\author</span><span style="color: #008000">{</span>Marek Smolík<span style="color: #008000">}</span>
+
+<span style="color: #008000; font-weight: bold">\begin</span><span style="color: #008000">{</span>document<span style="color: #008000">}</span>
+
+<span style="color: #008000; font-weight: bold">\maketitle</span>
+
+Tohle je nějaký pěkný dostatečně dlouhý odstavec vhodný pro demonstraci odstavců. Zalomuje se na více řádků, aby bylo vidět, jak se chová. Ve výchozím nastavení má první odstavec v sekci větší otsazení prvního řádu, to můžeme vypnout pomocí <span style="color: #008000; font-weight: bold">\texttt</span><span style="color: #008000">{</span>parindent<span style="color: #008000">}</span>.
+
+Tohle je v pořadí druhý odstavec. Odstavce jsou vždy odděleny prázdnou řádkou. Pokud bych je třeba chtěl hned vedle sebe, nastavil bych <span style="color: #008000; font-weight: bold">\texttt</span><span style="color: #008000">{</span>parskip<span style="color: #008000">}</span> na 0.
+
+<span style="color: #008000; font-weight: bold">\end</span><span style="color: #008000">{</span>document<span style="color: #008000">}</span>
+</pre>
+</div>
+
+<p>
+  Tento útržek by zkompilovaný do PDF dal následující výsledek:<br />
+  <img src="/media/__latex_doku.png" />
+</p>
+
+<p>
+  Jak je vidět, není potřeba se vůbec soustředit na vzhled – ten není v
+  nejmenším případě důležitý. Soustředím se na obsah. V momentě, kdy chci vzhled
+  přizpůsobit, zkrátka si pohraji trochu s čísli v hlavičce dokumentu a mám
+  hotovo. Styl je tak krásně
+  <strong>deklarativní</strong>.
+</p>
+
+<p>
+  S tím úzce souvisí také fakt, že dané dokumenty budou vypadat vždy úplně
+  stejně, není potřeba se piplat s různými verzemi příslušného programu a bát
+  se, že když otevřu dokument v jiné verzi, tak se mi všechno „rozsype“. Mohli
+  bychom říci, že je celý systém
+  <strong>reprodukovatelný</strong>.
+</p>
+
+<p>
+  Tato konstelace dělá celý systém celkem
+  <strong>robustní</strong> a <strong>spolehlivý</strong>.
+</p>
+
+<h2
+  class="highlight"
+  data-heading="Co dělá LaTeX né zas tak skvělým"
+  id="Co_dělá_LaTeX_né_zas_tak_skvělým"
+>
+  Co dělá LaTeX né zas tak skvělým
+</h2>
+
+<p>
+  Jak již bylo naznačeno, tento stařičký systém má své vrtochy, které z dnešního
+  pohledu mohou činit potíže a pokud by se dokázaly odbourat, byl by výsledný
+  systém
+  <em>skutečně perfektní</em>.
+</p>
+
+<h3
+  data-heading="Těžkopádnost instalace a nepřehlednost systémů"
+  id="Těžkopádnost_instalace_a_nepřehlednost_systémů"
+>
+  Těžkopádnost instalace a nepřehlednost systémů
+</h3>
+
+<p>
+  Nejen že uživatel tahá do souborů externí balíčky (makra), ale
+  <em>vše</em> je z těchto maker. Takový systém si nelze spravovat sám, a tak
+  existují správci lokálních instalací. Nejrozšířenější jsou
+  <a
+    data-tooltip-position="top"
+    aria-label="https://miktex.org/"
+    rel="noopener"
+    class="external-link"
+    href="https://miktex.org/"
+    target="_blank"
+    >MiKTeX</a
+  >
+  a
+  <a
+    data-tooltip-position="top"
+    aria-label="https://www.tug.org/texlive"
+    rel="noopener"
+    class="external-link"
+    href="https://www.tug.org/texlive"
+    target="_blank"
+    >TeX Live</a
+  >.
+</p>
+
+<p>
+  Ať už si zvolíte kterýkoliv, výsledek bude přebloatění souborového systému
+  minimálně vysokými stovkami MB. Posléze stačí pár externích balíčků a celá
+  instalace znatelně nabobtná. Navíc příslušné balíčky, které nejsou lokální
+  přístupné se musí nuceně v GUI pitomě hledat.
+</p>
+
+<p>
+  Nutno podotknout, že tohle řeší např. projekt
+  <a
+    data-tooltip-position="top"
+    aria-label="https://tectonic-typesetting.github.io/en-US/"
+    rel="noopener"
+    class="external-link"
+    href="https://tectonic-typesetting.github.io/en-US/"
+    target="_blank"
+    >tectonic</a
+  >. Ten natáhne jen skutečné minimum a poté až při generování nového souboru
+  stáhne vše potřebné.
+</p>
+
+<h3 data-heading="Pomalý překlad" id="Pomalý_překlad">Pomalý překlad</h3>
+
+<p>
+  Právě s překladem souboru do výstupního formátu (jako PDF) je velký problém.
+  Překlad je strašně pomalý. Pro menší dokumenty to není veliký problém, ale
+  když převýší počet přibližně 20, již nastane problém. Obzvláště pokud člověk
+  použije nějaký balíček jako
+  <a
+    data-tooltip-position="top"
+    aria-label="https://www.overleaf.com/learn/latex/TikZ_package"
+    rel="noopener"
+    class="external-link"
+    href="https://www.overleaf.com/learn/latex/TikZ_package"
+    target="_blank"
+    >TikZ</a
+  >
+  pro generování různých grafik, je po ptákách.
+</p>
+
+<p>
+  Generování zabere i na moderních sytémech klidně i nad deset sekund.
+  Anekdotický scénář je, že má člověk chybu (invalidní syntax) v rovnici. Chybu
+  „opraví“, rekompiluje a čeká… a čeká… a chyba překladu. A začíná to nanovo.
+</p>
+
+<ul class="cute-border">
+  <li data-line="0">
+    Jedno řešení je <strong>multi-threading</strong>. Ale....... TeX je
+    single-threaded. To nevypadá jako dobrá cesta bez kompletního reworku.<br />
+  </li>
+  <li data-line="2">
+    Alternativní nápad by byl překladač, který by byl dosti inteligentní na to,
+    aby
+    <strong>cachoval části dokumentu</strong> a při každé rekompilaci
+    kontroloval komponenty, které se změnily a musí tak být znovu vygenerovány.
+    Tyto částečky by byly slepeny a vytvořili by tak dokument o dost rychleji. V
+    extrémním případě by to mohlo vypadat jako v
+    <a
+      data-tooltip-position="top"
+      aria-label="https://obsidian.md/"
+      rel="noopener"
+      class="external-link"
+      href="https://obsidian.md/"
+      target="_blank"
+      >Obsidianu</a
+    >: <img src="/media/__latex_obsidian.webp"
+  </li>
+  <li data-line="3">
+    Ještě k tomu syntaxu. Nebylo by od škody mít
+    <strong>LSP</strong> (Language Server Protocol), který by šlo rozumně
+    integrovat do libovolného IDE bez potřeby zahájit překlad pro identifikování
+    chyb.
+  </li>
+</ul>
+
+<p>
+  Toto jsou ale jen pouhá zbožná přání. Osobně si nejsem vědom jakýchkoliv
+  projektů, které by některé z těchto věcí implementovaly.
+</p>
+
+<h3 data-heading="Špinavý syntax" id="Špinavý_syntax">Špinavý syntax</h3>
+
+<p>
+  Syntax TeXu je otřesný. Všude přebývají znaky, které tam nemusí být. V tomto
+  ohledu by mohlo dojít inspiraci
+  <a
+    data-tooltip-position="top"
+    aria-label="https://www.markdownguide.org/basic-syntax/"
+    rel="noopener"
+    class="external-link"
+    href="https://www.markdownguide.org/basic-syntax/"
+    target="_blank"
+    >Markdownem</a
+  >. Například v členění dokumentu bychom psali v TeXu:
+</p>
+
+<!-- HTML generated using hilite.me -->
+<div
+  style="
+    background: #f8f8f800;
+    overflow: auto;
+    width: auto;
+    border: solid gray;
+    border-width: 0.1em 0.1em 0.1em 0.8em;
+    padding: 0.2em 0.6em;
+  "
+>
+  <pre
+    style="margin: 0; line-height: 125%"
+  ><span style="color: #008000; font-weight: bold">\section</span><span style="color: #008000">{</span>Kalkul<span style="color: #008000">}</span>
+<span style="color: #008000; font-weight: bold">\subsection</span><span style="color: #008000">{</span>Integrální počet<span style="color: #008000">}</span>
+<span style="color: #008000; font-weight: bold">\subsubsection</span><span style="color: #008000">{</span>Určité integrály<span style="color: #008000">}</span>
+</pre>
+</div>
+
+<p>To je otřes. Alternativa v TeXu:</p>
+
+<!-- HTML generated using hilite.me -->
+<div
+  style="
+    background: #f8f8f800;
+    overflow: auto;
+    width: auto;
+    border: solid gray;
+    border-width: 0.1em 0.1em 0.1em 0.8em;
+    padding: 0.2em 0.6em;
+  "
+>
+  <pre style="margin: 0; line-height: 125%">
+# Kalkul
+## Integrální počet
+### Určité integrály
+</pre
+  >
+</div>
+
+<p>Rychlé a přehledné. Krása střídá nádheru. Některá další srovnání:</p>
+
+<!-- HTML generated using hilite.me -->
+<div
+  style="
+    background: #f8f8f800;
+    overflow: auto;
+    width: auto;
+    border: solid gray;
+    border-width: 0.1em 0.1em 0.1em 0.8em;
+    padding: 0.2em 0.6em;
+  "
+>
+  <pre style="margin: 0; line-height: 125%">
+\textbf{tučný}          --- **tučný**
+\textit{kurzivní}       --- *kurzivní*
+\texttt{neproporciální} --- `neproporciální`
+</pre
+  >
+</div>
+
+<h2
+  class="highlight"
+  data-heading="Jak se s tím vypořádat?"
+  id="Jak_se_s_tím_vypořádat?"
+>
+  Jak se s tím vypořádat?
+</h2>
+
+<p>
+  Nepřijde mi, že se tento problém někam hýbe a setrvává
+  <em>status quo</em>.
+</p>
+
+<p>
+  Osobně nejsem obecně největším fanouškem masivních IDE. Proto zde naznačím
+  několik workflows, které se mi osvědčili.
+</p>
+
+<p>
+  První potřebou je použít nějaký expander textu, minimálně pro rovnice. Každý,
+  kdo píše v TeXu rovnice určitě pozná ten pocit, když musí napsat kopu kódu pro
+  určité objekty – třeba matice (nebo automatický škálované závorky; což
+  absolutně nechápu, že není výchozí chování). Psát:
+</p>
+
+<!-- HTML generated using hilite.me -->
+<div
+  style="
+    background: #f8f8f800;
+    overflow: auto;
+    width: auto;
+    border: solid gray;
+    border-width: 0.1em 0.1em 0.1em 0.8em;
+    padding: 0.2em 0.6em;
+  "
+>
+  <pre
+    style="margin: 0; line-height: 125%"
+  ><span style="color: #008000; font-weight: bold">\begin</span><span style="color: #008000">{</span>pmatrix<span style="color: #008000">}</span>
+x <span style="color: #008000">&amp;</span> y <span style="color: #008000">&amp;</span> 1
+<span style="color: #008000; font-weight: bold">\end</span><span style="color: #008000">{</span>pmatrix<span style="color: #008000">}</span><span style="color: #008000; font-weight: bold">\begin</span><span style="color: #008000">{</span>pmatrix<span style="color: #008000">}</span>
+a<span style="color: #008000">_{</span>11<span style="color: #008000">}</span> <span style="color: #008000">&amp;</span> a<span style="color: #008000">_{</span>12<span style="color: #008000">}</span> <span style="color: #008000">&amp;</span> a<span style="color: #008000">_{</span>13<span style="color: #008000">}</span> <span style="color: #008000; font-weight: bold">\\</span>
+a<span style="color: #008000">_{</span>12<span style="color: #008000">}</span> <span style="color: #008000">&amp;</span> a<span style="color: #008000">_{</span>22<span style="color: #008000">}</span> <span style="color: #008000">&amp;</span> a<span style="color: #008000">_{</span>23<span style="color: #008000">}</span> <span style="color: #008000; font-weight: bold">\\</span>
+a<span style="color: #008000">_{</span>13<span style="color: #008000">}</span> <span style="color: #008000">&amp;</span> a<span style="color: #008000">_{</span>23<span style="color: #008000">}</span> <span style="color: #008000">&amp;</span> a<span style="color: #008000">_{</span>33<span style="color: #008000">}</span> <span style="color: #008000; font-weight: bold">\\</span>
+<span style="color: #008000; font-weight: bold">\end</span><span style="color: #008000">{</span>pmatrix<span style="color: #008000">}</span><span style="color: #008000; font-weight: bold">\begin</span><span style="color: #008000">{</span>pmatrix<span style="color: #008000">}</span>
+x <span style="color: #008000; font-weight: bold">\\</span> y <span style="color: #008000; font-weight: bold">\\</span> 1
+<span style="color: #008000; font-weight: bold">\end</span><span style="color: #008000">{</span>pmatrix<span style="color: #008000">}</span>=0
+</pre>
+</div>
+
+<p>
+  je opravdu na nic. Vypisovat jak opička každou matici. Co kdyby člověk napsal
+  něco jako <code>pmat</code>, a automaticky by se mu vypsalo:
+</p>
+
+<!-- HTML generated using hilite.me -->
+<div
+  style="
+    background: #f8f8f800;
+    overflow: auto;
+    width: auto;
+    border: solid gray;
+    border-width: 0.1em 0.1em 0.1em 0.8em;
+    padding: 0.2em 0.6em;
+  "
+>
+  <pre
+    style="margin: 0; line-height: 125%"
+  ><span style="color: #008000; font-weight: bold">\begin</span><span style="color: #008000">{</span>pmatrix<span style="color: #008000">}</span>
+
+<span style="color: #008000; font-weight: bold">\end</span><span style="color: #008000">{</span>pmatrix<span style="color: #008000">}</span>
+</pre>
+</div>
+
+<p>To by bylo super.</p>
+
+<p>
+  Pokud děláte v nějakém editoru, který pro toto nemá podporu, doporučil bych
+  <a
+    data-tooltip-position="top"
+    aria-label="https://espanso.org/"
+    rel="noopener"
+    class="external-link"
+    href="https://espanso.org/"
+    target="_blank"
+    >espanso</a
+  >. Jedná se o expander textu, který já osobně používám pro různé jiné věci
+  jako speciální znaky. Je to vysoce konfigurovatelný program a člověk může
+  třeba i použít Regex.
+</p>
+
+<p>
+  Já osobně většinu svých technických/matematických poznámek píši v již zmíněném
+  poznámkovém programu Obsidian. Jeho workflow spočívá ve tvoření plaintextových
+  .md souborů, které se nazvájem dají propojovat. V těchto souborech lze použít
+  TeXovský syntax na rovnice. Zároveň je tento program velice rozšiřitelný
+  komunitními pluginy. Jeden z nich je
+  <a
+    data-tooltip-position="top"
+    aria-label="https://github.com/artisticat1/obsidian-latex-suite"
+    rel="noopener"
+    class="external-link"
+    href="https://github.com/artisticat1/obsidian-latex-suite"
+    target="_blank"
+    >Latex Suite</a
+  >, ve kterém si člověk může nadefinovat tyto zkratky pomocí JSONového souboru.
+  Například výše zmíněný problém s psaním matic lze vyřešit následujícím řádkem
+  v konfigu:
+</p>
+
+<!-- HTML generated using hilite.me -->
+<div
+  style="
+    background: #f8f8f800;
+    overflow: auto;
+    width: auto;
+    border: solid gray;
+    border-width: 0.1em 0.1em 0.1em 0.8em;
+    padding: 0.2em 0.6em;
+  "
+>
+  <pre
+    style="margin: 0; line-height: 125%"
+  >{<span style="border: 1px solid #FF0000">trigger:</span> <span style="color: #008000; font-weight: bold">&quot;pmat&quot;</span>, <span style="border: 1px solid #FF0000">replacement:</span> <span style="color: #008000; font-weight: bold">&quot;\\begin{pmatrix}\n$0\n\\end{pmatrix}$1&quot;</span>, <span style="border: 1px solid #FF0000">options:</span> <span style="color: #008000; font-weight: bold">&quot;MA&quot;</span>}<span style="border: 1px solid #FF0000">,</span>
+</pre>
+</div>
+
+<p>Zde:</p>
+<ul class="cute-border">
+  <li data-line="0">
+    <code>trigger</code> určuje posloupnost znaků, při které by se měla expanze
+    aktivovat
+  </li>
+  <li data-line="1">
+    <code>options</code> udává mód, v jakém kontextu je zkratka aktivní (v tomto
+    případě v kontextu matematickém)
+  </li>
+  <li data-line="2">
+    <code>replacement</code> udává čím se má zkratka přepsat
+    <ul>
+      <li data-line="3">zde musí být <code>\</code> „escapenuté“</li>
+      <li data-line="4">
+        <code>$&lt;číslo&gt;</code> udává tabulátorové pořadí po expanzi
+        <ul>
+          <li data-line="5">po expanzi se kurzor umístí na <code>$0</code></li>
+          <li data-line="6">
+            po
+            <span class="math math-inline is-loaded"
+              ><mjx-container class="MathJax" jax="CHTML"
+                ><mjx-math class="MJX-TEX"
+                  ><mjx-mi class="mjx-i"
+                    ><mjx-c
+                      class="mjx-c1D45B TEX-I"
+                    ></mjx-c></mjx-mi></mjx-math></mjx-container></span
+            >-tém stisknutí <code>&lt;TAB&gt;</code> se kurzor dostane na lokaci
+            <code>$n</code>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p>Ještě jedna lahůdka:</p>
+
+<!-- HTML generated using hilite.me -->
+<div
+  style="
+    background: #f8f8f800;
+    overflow: auto;
+    width: auto;
+    border: solid gray;
+    border-width: 0.1em 0.1em 0.1em 0.8em;
+    padding: 0.2em 0.6em;
+  "
+>
+  <pre
+    style="margin: 0; line-height: 125%"
+  >{<span style="border: 1px solid #FF0000">trigger:</span> <span style="color: #008000; font-weight: bold">&quot;([a-zA-Z])vec&quot;</span>, <span style="border: 1px solid #FF0000">replacement:</span> <span style="color: #008000; font-weight: bold">&quot;\\vec{[[0]]}&quot;</span>, <span style="border: 1px solid #FF0000">options:</span> <span style="color: #008000; font-weight: bold">&quot;rmA&quot;</span>}<span style="border: 1px solid #FF0000">,</span>
+</pre>
+</div>
+
+<p>
+  Takto nemusí člověk psát otravné <code>\vec{x}+\vec{y}…</code>, stačí pouze
+  <code>xvec + yvec…</code>.
+</p>
+
+<p>
+  Pokud se ukáže nutnost daný dokument napsaný v Obsidianu pořádně typograficky
+  vyexportovat (Obsidian má nativní export do PDF, ale tato feature je docela
+  špatná a těžce záleží na současně nastavené theme), lze tento plaintext
+  markdown dokument použitím programu
+  <a
+    data-tooltip-position="top"
+    aria-label="https://pandoc.org/"
+    rel="noopener"
+    class="external-link"
+    href="https://pandoc.org/"
+    target="_blank"
+    >pandoc</a
+  >
+  převést do TeXu, a pak si s výsledkem náležitě pohrát dle požadovaného
+  výsledku.
+</p>
+
+<p><strong>Koniec.</strong></p>

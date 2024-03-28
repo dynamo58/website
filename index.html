@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="main.css" />
+    <link rel="stylesheet" href="/main.css" />
 
     <title>smolik.xyz</title>
   </head>
@@ -17,7 +17,7 @@
         const rand_idx = Math.floor(Math.random() * IMGS.length);
 
         document.write(
-          `<img src="/${IMGS[rand_idx]}" style="width:200px; height: 156px;" class="heading__img"  alt="cute animal" />`
+          `<img src="/media/${IMGS[rand_idx]}" style="width:200px; height: 156px;" class="heading__img"  alt="cute animal" />`
         );
       </script>
 
@@ -36,20 +36,18 @@
 
     <div class="content-section">
       <div>
-        <span class="highlight-bigger">Projekty</span>, které tu žijí
+        <span class="highlight-bigger">Články</span>
         <ul class="spaced-lis">
-          <li>
-            <a href="/anim">
-              <span class="circ-boxed">Animace a animační křivky v Unity</span>
-              <span class="">(08. 12. 23)</span>
-            </a>
-          </li>
-          <li>
-            <a href="/snap">
-              <span class="circ-boxed">Zběžně o snap!u</span>
-              <span class="">(21. 03. 24)</span>
-            </a>
-          </li>
+          %ARTICLE-SUMMARIES%
+        </ul>
+      </div>
+    </div>
+    
+    <div class="content-section">
+      <div>
+        <span class="highlight-bigger">Suplementární materiály</span>
+        <ul class="spaced-lis">
+          %SUPPLEMENTARY-SUMMARIES%
         </ul>
       </div>
     </div>
@@ -61,15 +59,15 @@
           <li>
             <span>
               <a target="_blank" href="https://github.com/dynamo58"
-                >GitHub @ <span class="circ-boxed">dynamo58</span></a
+                >GitHub: <span class="circ-boxed">dynamo58</span></a
               >
             </span>
           </li>
           <li>
-            <span> Discord @ <code>spalovac_mrtvol</code> </span>
+            <span> Discord: spalovac_mrtvol </span>
           </li>
           <li>
-            <span> pošta @ <code>marek3smolik(na)seznam(tečka)cz</code> </span>
+            <span> pošta: <code>marek3smolik(na)seznam(tečka)cz</code> </span>
           </li>
         </ul>
       </div>
@@ -81,18 +79,12 @@
         <ul class="spaced-lis">
           <li>je mi 21 let</li>
           <li>
-            studuji matematiku a informatiku na
+            studuji učitelství matematiky a informatiky na
             <a
               target="_blank"
               href="https://www.mff.cuni.cz/en"
               class="circ-boxed"
               >MFF CUNI</a
-            >
-          </li>
-          <li>🏃 🚴 🖥 📔</li>
-          <li>
-            <a target="_blank" href="/pgp.txt" class="circ-boxed"
-              >můj PGP klíč</a
             >
           </li>
         </ul>
@@ -104,14 +96,7 @@
       style="border-top: 1px solid #fff; padding-top: 0.5em"
     >
       <p>
-        Poslední aktualizace: 8. 12. 23<br />
-        Cokoliv ohledně jejího obsahu adresujte na
-        <a
-          target="_blank"
-          href="https://github.com/dynamo58/website"
-          class="circ-boxed"
-          >její repozitář</a
-        >.
+        Poslední aktualizace: %CURRENT-DATE%
       </p>
     </div>
   </body>

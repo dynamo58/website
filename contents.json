@@ -1,0 +1,28 @@
+{
+	"articles": [
+		{
+			"location":   "cs-latex",
+			"locale":     "cs",
+			"title":      "Proč už LaTeX nestačí, a co s tím?",
+			"written-at": "1711654956",
+			"updated-at": "1711654956",
+			"author": "Marek Smolík"
+		}
+	],
+	"supplements": [
+		{
+			"location":    "anim",
+			"locale":      "cs",
+			"title":       "Animace a animační křivky",
+			"description": "Prezentace + materiály k hodině ohledně animací v Unity",
+			"updated-at":  "1702621282"
+		},
+		{
+			"location":    "snap",
+			"locale":      "cs",
+			"title":       "Zběžně o snap!u",
+			"description": "Prezentace k hodině povídání ohledně snap!u",
+			"updated-at":  "1711029600"
+		}
+	]
+}
