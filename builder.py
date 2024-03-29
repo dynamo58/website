@@ -50,15 +50,11 @@ def fmt_duration(secs: int):
 def apply_vars(s: str, props = {}):
     locale = props.get("locale") or DEFAULT_LOCALE
     
-    # debug
-    if (props.get("content")):
-        print(props.get("content"))
-        print(len(props.get("content")))
     var_map = {
         "%CURRENT-DATE%": lambda: fmt_timestamp(int(datetime.datetime.now().timestamp()), locale),
         "%UPDATED-AT%":   lambda: fmt_timestamp(int(props["updated-at"]), locale),
         "%WRITTEN-AT%":   lambda: fmt_timestamp(int(props["written-at"]), locale),
-        "%TIME-TO-READ%": lambda: fmt_duration(len(props["content"].split())/3.33),
+        "%TIME-TO-READ%": lambda: fmt_duration(len(props["content"].split())/2.7),
         "%TITLE%":        lambda: props["title"],
         "%PATH%":         lambda: props["path"],
         "%CONTENT%":      lambda: props["content"],
@@ -105,10 +101,10 @@ def gen_suppl_summaries(suppls):
 
 
 def port_static():
-    shutil.copy("main.css", os.path.join(BUILD_PATH, "main.css"))
-    shutil.copy("favicon.ico", os.path.join(BUILD_PATH, "favicon.ico"))
-    shutil.copytree("media", os.path.join(BUILD_PATH, "media"))
-
+    shutil.copytree("styles",  os.path.join(BUILD_PATH, "styles"))
+    shutil.copytree("scripts", os.path.join(BUILD_PATH, "scripts"))
+    shutil.copytree("fonts",   os.path.join(BUILD_PATH, "fonts"))
+    shutil.copytree("media",   os.path.join(BUILD_PATH, "media"))
 
 def port_index(art_sum: str, supp_sum: str):
     index_file_og = open("index.html", "r")

@@ -1,34 +1,44 @@
 <!DOCTYPE html>
 <html lang="cs">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="/main.css" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>smolik.xyz</title>
-  </head>
+  <link rel="icon" href="/media/favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="/styles/main.css" />
 
-  <body>
-    <nav>
-      <a href="/">
-        <div class="nav-item">Domů</div>
-      </a>
-    </nav>
+  <link rel="stylesheet" href="/styles/onedark.min.css">
+  <script src="/scripts/highlight.min.js">
+  </script>
+  <script>hljs.highlightAll();</script>
 
-    <div class="content-section article-metadata">
-      <h2>%TITLE%</h2>
-      <p>Autor: <span class="highlight-alt">%AUTHOR%</span></p>
-      <p>Napsáno: <span class="highlight-alt">%WRITTEN-AT%</span></p>
-      <p>Aktualizováno: <span class="highlight-alt">%UPDATED-AT%</span></p>
-      <p>Doba čtení: <span class="highlight-alt">%TIME-TO-READ%</span></p>
-    </div>
+  <title>smolik.xyz</title>
+</head>
 
-    <div class="content-section article-contents">%CONTENT%</div>
+<body>
+  <nav>
+    <a href="/">
+      <div class="nav-item">Domů</div>
+    </a>
+  </nav>
 
-    <br />
-    <br />
-    <br />
-  </body>
+  <div class="content-section article-metadata">
+    <h2>%TITLE%</h2>
+    <p>
+      Autor: <span class="highlight-alt">%AUTHOR%</span><br />
+      Napsáno: <span class="highlight-alt">%WRITTEN-AT%</span><br />
+      Aktualizováno: <span class="highlight-alt">%UPDATED-AT%</span><br />
+      Doba čtení: <span class="highlight-alt">%TIME-TO-READ%</span>
+    </p>
+
+  </div>
+
+  <div class="content-section article-contents">%CONTENT%</div>
+
+  <br />
+  <br />
+  <br />
+</body>
+
 </html>

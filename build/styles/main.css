@@ -63,10 +63,17 @@ pre,
 */
 
 @font-face {
-	font-family: 'garamond';
-	src: url('/media/garamond-regular.ttf') format('truetype'),
-		url('/media/garamond-italic.ttf') format('truetype')
-		url('/media/garamond-bold.ttf') format('truetype'),
+	font-family: 'Georgia';
+	src: url('/fonts/georgia.ttf') format('truetype'),
+		url('/fonts/georgiab.ttf') format('truetype'),
+		url('/fonts/georgiai.ttf') format('truetype'),
+}
+
+@font-face {
+	font-family: 'JetBrains';
+	src: url('/fonts/JetBrainsMono-Regular.ttf') format('truetype'),
+		url('/fonts/JetBrainsMono-Bold.ttf') format('truetype'),
+		url('/fonts/JetBrainsMono-Italic.ttf') format('truetype'),
 }
 
 /* 
@@ -210,7 +217,7 @@ nav {
 }
 
 .cute-border {
-	padding: 1em 2em 1em 2em;
+	padding: 0.5em 2em 1em 2em;
 	margin: 1em 0;
 	border-radius: 1em;
 	border: 1px solid var(--main-fg);
@@ -236,7 +243,19 @@ nav {
 
 
 .article-contents {
-	font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-	/* font-size: 1.2em;
-	font-weight: 600; */
+	font-family: Georgia;
+	font-size: 1.125em;
+}
+
+code.hljs {
+	font-family: JetBrains;
+	/* background-color: #ffffff00 !important; */
+	border-radius: 1em;
+	font-size: 0.84em;
+	;
+}
+
+a.ref {
+	text-decoration: underline;
+	background-color: #258dd333 !important;
 }
