@@ -144,6 +144,9 @@ def port_supps(supps) -> None:
         print(f"          + {s['location']}")
         shutil.copytree(os.path.join(SUPPLEMENTARY_PATH, s["location"]), os.path.join(BUILD_PATH, "suppls", s["location"]))
 
+def port_startpage():
+    print(f"INFO: porting startpage")
+    shutil.copytree("startpage/", os.path.join(BUILD_PATH, "startpage"))
 
 def main(args: List[str]) -> int:
     start_time = time.time()
@@ -165,6 +168,9 @@ def main(args: List[str]) -> int:
     
     # then the supplementaries    
     port_supps(supps)
+    
+    # finally the startpage
+    port_startpage()
     
     delta = time.time() - start_time
     print(f"INFO: built in {delta:.3f}s")
